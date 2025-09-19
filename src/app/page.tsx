@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Feather, Sparkles, Heart, Users, Wand2, Music, Coffee, BookOpen, Palette, Share2, MoonStar, Gem } from "lucide-react";
+import { Feather, Sparkles, Heart, Users, Wand2, Music, Coffee, BookOpen, Palette, Share2, MoonStar, Gem, ArrowUpRight } from "lucide-react";
 import Reveal from "@/components/Reveal";
 
 export default function Home() {
@@ -31,6 +31,15 @@ export default function Home() {
                   <div>白湖婲</div>
                   <div>溪忘雨</div>
                   <div>甜则塔</div>
+                  <div>
+                    <Link
+                      href="https://IGCrystal.icu"
+                      className="inline-flex items-center gap-1.5 text-brand hover:text-brand/90 underline underline-offset-4 decoration-brand/60 transition-colors group"
+                    >
+                      <span>冰苷晶</span>
+                      <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    </Link>
+                  </div>
                 </div>
               </div>
             </Reveal>
