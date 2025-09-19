@@ -23,7 +23,7 @@ export default function Home() {
                   <Link href="https://status.wenturc.com/status/all" className="inline-flex h-11 items-center rounded-md bg-brand px-5 text-sm font-medium text-brand-foreground shadow hover:opacity-90">
                     当前状态
                   </Link>
-                  <Link href="https://docs.wenturc.com" className="inline-flex h-11 items-center rounded-md border px-5 text-sm font-medium hover:bg-black/[.04] dark:hover:bg-white/[.06]">
+                  <Link href="https://github.com/wenturc" className="inline-flex h-11 items-center rounded-md border px-5 text-sm font-medium hover:bg-black/[.04] dark:hover:bg-white/[.06]">
                     当前存档
                   </Link>
                 </div>
