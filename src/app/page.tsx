@@ -17,7 +17,7 @@ export default function Home() {
                   <span className="block text-brand">理解, 包容, 友善</span>
                 </h1>
                 <p className="mt-4 text-base text-muted">
-                  风来碎花去 雨来长虹消 聚散无常 但为新生
+                  风来碎花去 雨飘长虹显 聚散无常 但为新生
                 </p>
                 <div className="mt-8 flex items-center gap-3">
                   <Link href="https://status.wenturc.com/status/all" className="inline-flex h-11 items-center rounded-md bg-brand px-5 text-sm font-medium text-brand-foreground shadow hover:opacity-90">
