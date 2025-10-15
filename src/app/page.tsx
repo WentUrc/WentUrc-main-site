@@ -61,7 +61,6 @@ export default function Home() {
         </div>
       </section>
 
-
       {/* Overview + Title */}
       <Reveal>
         <section id="overview" className="py-12">
