@@ -6,9 +6,10 @@ type GlassRevealProps = {
   children: ReactNode;
   delayMs?: number;
   className?: string;
+  rounded?: string; // tailwind rounded class, e.g., 'rounded-md', 'rounded-2xl'
 };
 
-export default function GlassReveal({ children, delayMs = 0, className = "" }: GlassRevealProps) {
+export default function GlassReveal({ children, delayMs = 0, className = "", rounded = "rounded-md" }: GlassRevealProps) {
   const ref = useRef<HTMLDivElement | null>(null);
   const [visible, setVisible] = useState(false);
 
@@ -45,7 +46,7 @@ export default function GlassReveal({ children, delayMs = 0, className = "" }: G
   return (
     <div
       ref={ref}
-      className={`transition-all duration-1000 ease-out will-change-transform rounded-md overflow-hidden ${visibilityClass} ${className}`}
+      className={`transition-all duration-1000 ease-out will-change-transform ${rounded} overflow-hidden ${visibilityClass} ${className}`}
       style={{
         transformOrigin: 'center center',
       }}
