@@ -4,7 +4,7 @@ import { MessageSquare, NotebookText } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="border-t border-black/5 dark:border-white/10 mt-20 relative z-40">
+    <footer className="border-t border-black/5 dark:border-white/10 mt-20 relative z-40 backdrop-blur-md bg-white/60 dark:bg-black/60">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 grid gap-8 md:grid-cols-3 text-sm text-muted">
         <div>
           <div className="flex items-center gap-2 font-semibold mb-2">
@@ -25,7 +25,7 @@ export default function Footer() {
           <p className="text-muted">IGCrystal@wenturc.com</p>
         </div>
       </div>
-      <div className="text-center text-xs text-muted-foreground pb-8">© {new Date().getFullYear()} WentUrc. All rights reserved.</div>
+      <div className="text-center text-xs text-muted-foreground pb-8 px-4">© {new Date().getFullYear()} WentUrc. All rights reserved.</div>
     </footer>
   );
 }

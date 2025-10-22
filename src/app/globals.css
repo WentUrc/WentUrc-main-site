@@ -28,5 +28,29 @@
 body {
   background: var(--background);
   color: var(--foreground);
+  min-height: 100vh;
   font-family: var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-y: scroll;
+}
+
+img, svg, video {
+  display: block;
+  height: auto;
+}
+
+main section {
+  content-visibility: auto;
+}
+
+[data-animate] {
+  will-change: transform, opacity;
+}
+
+.image-wrapper {
+  position: relative;
+  overflow: hidden;
 }

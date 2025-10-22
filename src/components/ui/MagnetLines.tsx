@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useEffect, CSSProperties } from 'react';
+import React, { useRef, useEffect, useState, CSSProperties } from 'react';
 
 interface MagnetLinesProps {
   rows?: number;
@@ -26,8 +26,33 @@ const MagnetLines: React.FC<MagnetLinesProps> = ({
   style = {}
 }) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
-
+  const [isMobile, setIsMobile] = useState(true); // 默认为移动端，避免闪烁
+  const [mounted, setMounted] = useState(false);
+  
+  // 检测设备是否为移动端
   useEffect(() => {
+    setMounted(true);
+    
+    const checkIfMobile = () => {
+      setIsMobile(window.innerWidth < 768); // 768px 是 md 断点
+    };
+    
+    // 初始检测
+    checkIfMobile();
+    
+    // 监听窗口大小变化
+    window.addEventListener('resize', checkIfMobile);
+    
+    return () => {
+      window.removeEventListener('resize', checkIfMobile);
+    };
+  }, []);
+  
+  // 处理指针移动逻辑
+  useEffect(() => {
+    // 如果是移动端或组件尚未挂载，则不添加事件监听
+    if (isMobile || !mounted) return;
+    
     const container = containerRef.current;
     if (!container) return;
 
@@ -63,7 +88,7 @@ const MagnetLines: React.FC<MagnetLinesProps> = ({
     return () => {
       window.removeEventListener('pointermove', handlePointerMove);
     };
-  }, []);
+  }, [isMobile, mounted]);
 
   const total = rows * columns;
   const spans = Array.from({ length: total }, (_, i) => (
@@ -80,6 +105,11 @@ const MagnetLines: React.FC<MagnetLinesProps> = ({
       }}
     />
   ));
+
+  // 如果是移动端且已挂载，则不渲染组件
+  if (isMobile && mounted) {
+    return null;
+  }
 
   return (
     <div

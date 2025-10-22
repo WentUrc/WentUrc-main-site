@@ -24,17 +24,17 @@ export default function Home() {
       />
       
       {/* Hero */}
-      <section className="relative overflow-hidden min-h-screen flex items-center justify-center z-20">
-  <div className="container mx-auto px-6 sm:px-8 md:px-12 pt-8 pb-16 md:pt-12 md:pb-20">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div className="max-w-3xl lg:ml-auto">
-                <h1 className="font-sans text-5xl/tight sm:text-6xl/tight md:text-7xl/tight font-semibold tracking-tight">
+      <section className="relative overflow-hidden min-h-[calc(100vh-4rem)] flex items-center justify-center z-20">
+  <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 pt-8 pb-16 md:pt-12 md:pb-20">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-6 lg:gap-4 items-center">
+            <div className="max-w-3xl lg:text-right w-full lg:w-auto mt-6 lg:mt-0 lg:ml-auto lg:mr-16 lg:pr-4">
+                <h1 className="font-sans text-4xl/tight sm:text-5xl/tight md:text-6xl/tight lg:text-7xl/tight font-semibold tracking-tight text-center lg:text-right">
                   <BlurText as="span" text="WentUrc" animateBy="letters" />
                   <BlurText as="span" className="block text-brand" text="理解, 包容, 友善" animateBy="words" />
                 </h1>
                 <BlurText
                   as="p"
-                  className="mt-6 text-xl leading-8 text-muted"
+                  className="mt-6 text-xl leading-8 text-muted text-center lg:text-right"
                   text="风来碎花去 雨飘长虹显 聚散无常 但为新生"
                   animateBy="words"
                   delay={100}
@@ -66,20 +66,22 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-            <div className="hidden lg:flex justify-start relative">
+            <div className="flex justify-start relative lg:-ml-8">
               <div className="absolute inset-0 pointer-events-none select-none">
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] md:w-[400px] md:h-[400px] lg:w-[500px] lg:h-[500px] bg-brand/20 dark:bg-brand/10 rounded-full blur-3xl opacity-30" />
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200px] h-[200px] sm:w-[250px] sm:h-[250px] md:w-[350px] md:h-[350px] lg:w-[500px] lg:h-[500px] bg-brand/20 dark:bg-brand/10 rounded-full blur-3xl opacity-30" />
               </div>
-              <div className="relative z-10">
+              <GlassReveal className="relative z-10 flex items-center" delayMs={200}>
                 <Image 
-                  src="https://raw.githubusercontent.com/WentUrc/.github/refs/heads/main/img/WentUrc-2.png"
+                  src="/WentUrc-2.png"
                   alt="WentUrc" 
                   width={500}
                   height={500}
-                  className="w-auto h-auto max-h-[500px] object-contain select-none"
+                  className="w-auto h-auto max-h-[300px] sm:max-h-[350px] md:max-h-[400px] lg:max-h-[500px] object-contain select-none"
                   priority
+                  placeholder="blur"
+                  blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+P+/HgAFdQIvw4B6jQAAAABJRU5ErkJggg=="
                 />
-              </div>
+              </GlassReveal>
             </div>
           </div>
         </div>
