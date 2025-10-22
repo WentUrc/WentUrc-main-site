@@ -45,10 +45,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-dvh bg-background text-foreground`}>
+    <html lang="en" className="scroll-smooth">
+      <body 
+        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-dvh bg-background text-foreground`}
+        style={{ overscrollBehavior: 'none' }}
+      >
         <Navbar />
-        {children}
+        <div className="contents">{children}</div>
         <Footer />
       </body>
     </html>

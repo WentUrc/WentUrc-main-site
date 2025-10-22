@@ -1,69 +1,95 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Feather, Sparkles, Heart, Users, Wand2, Music, Coffee, BookOpen, Palette, Share2, MoonStar, Gem, ArrowUpRight } from "lucide-react";
-import Reveal from "@/components/Reveal";
+import Reveal from "@/components/ui/Reveal";
+import BlurText from "@/components/ui/BlurText";
+import BackgroundWithMask from "@/components/ui/BackgroundWithMask";
+import GlassReveal from "@/components/ui/GlassReveal";
 
 export default function Home() {
   return (
-    <main>
+    <main className="relative">
+      {/* 全屏背景 */}
+      <BackgroundWithMask 
+        magnetLinesProps={{
+          rows: 18,
+          columns: 18,
+          lineColor: '#94a3b8',
+          lineWidth: '0.6vmin',
+          lineHeight: '3vmin',
+          baseAngle: -8
+        }}
+        maskOpacity={0.85}
+        enableBlur={false}
+      />
+      
       {/* Hero */}
-      <section className="relative overflow-hidden">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-16 pb-24 md:pt-24 md:pb-32">
-          <div className="grid gap-10 md:grid-cols-2 md:items-center">
-            <Reveal>
-              <div>
-                <h1 className="font-sans text-4xl/tight sm:text-5xl/tight font-semibold tracking-tight">
-                  WentUrc
-                  <span className="block text-brand">理解, 包容, 友善</span>
+      <section className="relative overflow-hidden min-h-[calc(100vh-4rem)] flex items-center justify-center z-20">
+        <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 pt-8 pb-16 md:pt-12 md:pb-20">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-6 lg:gap-4 items-center">
+            <div className="max-w-3xl lg:text-right w-full lg:w-auto mt-6 lg:mt-0 lg:ml-auto lg:mr-16 lg:pr-4">
+                <h1 className="font-sans text-5xl/tight sm:text-5xl/tight md:text-5xl/tight lg:text-7xl/tight font-semibold tracking-tight text-center lg:text-right">
+                  <BlurText as="span" text="WentUrc" animateBy="letters" />
+                  <BlurText as="span" className="block text-brand" text="理解, 包容, 友善" animateBy="words" />
                 </h1>
-                <p className="mt-4 text-base text-muted">
-                  风来碎花去 雨飘长虹显 聚散无常 但为新生
-                </p>
-                <div className="mt-8 flex items-center gap-3">
-                  <Link href="https://status.wenturc.com/status/all" className="inline-flex h-11 items-center rounded-md bg-brand px-5 text-sm font-medium text-brand-foreground shadow hover:opacity-90">
-                    当前状态
-                  </Link>
-                  <Link href="https://github.com/wenturc" className="inline-flex h-11 items-center rounded-md border px-5 text-sm font-medium hover:bg-black/[.04] dark:hover:bg-white/[.06]">
-                    当前存档
-                  </Link>
+                <BlurText
+                  as="p"
+                  className="mt-6 text-xl leading-8 text-muted text-center lg:text-right"
+                  text="风来碎花去 雨飘长虹显 聚散无常 但为新生"
+                  animateBy="words"
+                  delay={100}
+                />
+                <div className="mt-8 flex items-center gap-6">
+                  <GlassReveal delayMs={100}>
+                    <Link href="https://status.wenturc.com/status/all" className="inline-flex h-11 items-center px-6 text-sm font-medium text-brand-foreground bg-brand rounded-md shadow hover:opacity-90 transition-all">
+                      当前状态
+                    </Link>
+                  </GlassReveal>
+                  <GlassReveal delayMs={250}>
+                    <Link href="https://github.com/wenturc" className="inline-flex h-11 items-center px-6 text-sm font-medium border rounded-md hover:bg-black/[.04] dark:hover:bg-white/[.06] transition-all">
+                      当前存档
+                    </Link>
+                  </GlassReveal>
                 </div>
                 <div className="mt-6 flex items-center gap-6 text-xs text-muted-foreground">
-                  <div>白湖婲</div>
-                  <div>溪忘雨</div>
-                  <div>甜则塔</div>
+                  <div><BlurText as="span" text="白湖婲" animateBy="letters" stepDuration={0.25} /></div>
+                  <div><BlurText as="span" text="溪忘雨" animateBy="letters" stepDuration={0.25} /></div>
+                  <div><BlurText as="span" text="甜则塔" animateBy="letters" stepDuration={0.25} /></div>
                   <div>
                     <Link
                       href="https://IGCrystal.icu"
                       className="inline-flex items-center gap-1.5 text-brand hover:text-brand/90 underline underline-offset-4 decoration-brand/60 transition-colors group"
                     >
-                      <span>冰苷晶</span>
+                        <BlurText as="span" text="冰苷晶" animateBy="letters" stepDuration={0.25} />
                       <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                     </Link>
                   </div>
                 </div>
               </div>
-            </Reveal>
-            <Reveal delayMs={120} from="up">
-              <div className="relative">
-                <div className="relative aspect-[4/3] rounded-xl overflow-hidden ring-1 ring-black/5 dark:ring-white/10 bg-gradient-to-br from-brand/20 via-accent/20 to-brand/10">
-                  <Image
-                    src="https://github.wenturc.com/WentUrc/.github/refs/heads/main/img/WentUrc-2.png"
-                    alt="WentUrc world"
-                    fill
-                    sizes="(min-width: 1024px) 50vw, 100vw"
-                    className="object-cover"
-                    priority
-                  />
-                </div>
+            <div className="flex justify-start relative lg:-ml-8">
+              <div className="absolute inset-0 pointer-events-none select-none">
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200px] h-[200px] sm:w-[250px] sm:h-[250px] md:w-[350px] md:h-[350px] lg:w-[500px] lg:h-[500px] bg-brand/20 dark:bg-brand/10 rounded-full blur-3xl opacity-30" />
               </div>
-            </Reveal>
+              <GlassReveal className="relative z-10 flex items-center" delayMs={200} rounded="rounded-2xl lg:rounded-3xl">
+                <Image 
+                  src="/WentUrc-2.png"
+                  alt="WentUrc" 
+                  width={500}
+                  height={500}
+                  className="w-auto h-auto max-h-[300px] sm:max-h-[350px] md:max-h-[400px] lg:max-h-[500px] object-contain select-none"
+                  priority
+                  placeholder="blur"
+                  blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+P+/HgAFdQIvw4B6jQAAAABJRU5ErkJggg=="
+                />
+              </GlassReveal>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Overview + Title */}
       <Reveal>
-        <section id="overview" className="py-12">
+        <section id="overview" className="py-12 relative z-20">
           <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
             <h2 className="text-2xl font-semibold tracking-tight flex items-center gap-2"><Feather className="h-5 w-5 text-brand" />心念织梦之界</h2>
           </div>
@@ -72,7 +98,7 @@ export default function Home() {
 
       {/* 世界概述 */}
       <Reveal delayMs={80}>
-        <section className="py-6">
+        <section className="py-6 relative z-20">
           <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
             <h3 className="text-xl font-semibold tracking-tight flex items-center gap-2"><Sparkles className="h-5 w-5 text-brand" />世界概述</h3>
             <div className="mt-3 space-y-3 text-[15px] leading-7 text-muted">
@@ -85,7 +111,7 @@ export default function Home() {
 
       {/* 世界主旨 */}
       <Reveal delayMs={120}>
-        <section className="py-6">
+        <section className="py-6 relative z-20">
           <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
             <h3 className="text-xl font-semibold tracking-tight flex items-center gap-2"><Heart className="h-5 w-5 text-brand" />世界主旨</h3>
             <div className="mt-3 space-y-3 text-[15px] leading-7 text-muted">
@@ -98,7 +124,7 @@ export default function Home() {
 
       {/* 社会构成 */}
       <Reveal delayMs={160}>
-        <section id="cases" className="py-6">
+        <section id="cases" className="py-6 relative z-20">
           <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
             <h3 className="text-xl font-semibold tracking-tight flex items-center gap-2"><Users className="h-5 w-5 text-brand" />社会构成</h3>
             <p className="mt-3 text-[15px] leading-7 text-muted">以“梦环”（Dream Circles）为基本单位的自治共同体：由理念相近、心念共鸣的成员自发组成。各梦环互不干涉、彼此协作。</p>
@@ -116,7 +142,7 @@ export default function Home() {
 
       {/* 魔法系统 */}
       <Reveal delayMs={200}>
-        <section id="faq" className="py-6">
+        <section id="faq" className="py-6 relative z-20">
           <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
             <h3 className="text-xl font-semibold tracking-tight flex items-center gap-2"><Wand2 className="h-5 w-5 text-brand" />魔法系统：意念架构（Mindcraft）</h3>
             <p className="mt-3 text-[15px] leading-7 text-muted">魔法是自我精神的结构化表达。</p>
@@ -132,7 +158,7 @@ export default function Home() {
 
       {/* 风格基调 */}
       <Reveal delayMs={240}>
-        <section id="style" className="py-6">
+        <section id="style" className="py-6 relative z-20">
           <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
             <h3 className="text-2xl font-semibold tracking-tight flex items-center gap-2"><Music className="h-5 w-5 text-brand" />风格基调</h3>
             <p className="mt-3 text-[15px] leading-7 text-muted">慢与温柔是默认节拍：晨雾里的浮空温泉、星夜中的灵歌会、银藤花街的旅人……</p>
