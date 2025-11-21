@@ -18,7 +18,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = getBaseUrl();
 
   const staticRoutes = [
-    "/", 
+    "/",
+    "/xirayu",
   ];
 
   const now = new Date();

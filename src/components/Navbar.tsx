@@ -1,8 +1,18 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { MessageSquare, NotebookText } from "lucide-react";
 
 export default function Navbar() {
+  const pathname = usePathname();
+  const hideLayoutChrome = pathname?.startsWith("/xirayu");
+
+  if (hideLayoutChrome) {
+    return null;
+  }
+
   return (
     <header className="sticky top-0 z-40 w-full border-b border-black/5 dark:border-white/10 backdrop-blur supports-[backdrop-filter]:bg-background/70">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">

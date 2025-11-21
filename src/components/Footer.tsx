@@ -1,8 +1,18 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { MessageSquare, NotebookText } from "lucide-react";
 
 export default function Footer() {
+  const pathname = usePathname();
+  const hideLayoutChrome = pathname?.startsWith("/xirayu");
+
+  if (hideLayoutChrome) {
+    return null;
+  }
+
   return (
     <footer className="border-t border-black/5 dark:border-white/10 mt-20 relative z-40 backdrop-blur-md bg-white/60 dark:bg-black/60">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 grid gap-8 md:grid-cols-3 text-sm text-muted">
