@@ -103,13 +103,14 @@ const RAW_CONTENT = [
 
 const HERO_TITLE = RAW_CONTENT[0].text;
 const STORY_PARAGRAPHS = RAW_CONTENT.slice(1);
+
 const SCROLL_PER_SECTION = 80;
 const HERO_SCROLL_RANGE = 60;
 
 const PARAGRAPHS_PER_SECTION = {
-  mobile: 1,   // < 640
-  tablet: 2,   // >=640 && <1024
-  desktop: 3,  // >=1024
+  mobile: 1,
+  tablet: 2,
+  desktop: 3,
 };
 
 function chunkArray<T>(arr: T[], size: number): T[][] {
@@ -197,13 +198,19 @@ export default function XirayuPage() {
   useEffect(() => {
     const root = document.documentElement;
     const originalScrollBehavior = root.style.scrollBehavior;
+
     const hasScrollRestoration = typeof window !== 'undefined' && 'scrollRestoration' in window.history;
-    const originalScrollRestoration = hasScrollRestoration ? (window.history as any).scrollRestoration : null;
+    // 使用明确类型替代 'any'，以满足 eslint 规则
+    const historyObj = window.history as History & { scrollRestoration?: History['scrollRestoration'] };
+    const originalScrollRestoration = hasScrollRestoration ? historyObj.scrollRestoration : null;
+
     root.style.scrollBehavior = 'auto';
     if (hasScrollRestoration && originalScrollRestoration) {
-      (window.history as any).scrollRestoration = 'manual';
+      historyObj.scrollRestoration = 'manual';
     }
+
     window.scrollTo(0, 0);
+
     initialMeasureRef.current = requestAnimationFrame(() => {
       measure();
       initialMeasureRef.current = requestAnimationFrame(() => {
@@ -215,7 +222,7 @@ export default function XirayuPage() {
     return () => {
       root.style.scrollBehavior = originalScrollBehavior;
       if (hasScrollRestoration) {
-        (window.history as any).scrollRestoration = originalScrollRestoration ?? 'auto';
+        historyObj.scrollRestoration = originalScrollRestoration ?? 'auto';
       }
       if (initialMeasureRef.current) {
         cancelAnimationFrame(initialMeasureRef.current);
@@ -302,7 +309,7 @@ export default function XirayuPage() {
               className={`absolute bottom-0 left-0 h-[2px] bg-cyan-400 shadow-[0_0_15px_rgba(34,211,238,0.6)] transition-all duration-700 ease-out ${isLoaded ? "opacity-100" : "opacity-0"}`}
               style={{ width: `${progressPercentage}%` }}
             />
-            
+
             {SECTIONS.map((section, index) => {
               const isActive = index === activeIdx;
               return (
@@ -316,7 +323,6 @@ export default function XirayuPage() {
                   }}
                 >
                   <div className="relative pb-6 md:pb-8">
-                  
                     {section.map((block, pIdx) => (
                       <p
                         key={pIdx}
