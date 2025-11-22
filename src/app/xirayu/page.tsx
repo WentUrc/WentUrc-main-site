@@ -311,8 +311,9 @@ export default function XirayuPage() {
               className="absolute bottom-0 left-0 h-[2px] w-full bg-cyan-400 shadow-[0_0_15px_rgba(34,211,238,0.6)] origin-left"
               style={{
                 transform: `scaleX(${isLoaded ? progressScale : 0})`,
-                opacity: isLoaded ? 1 : 0,
-                transition: 'opacity 700ms ease-out, transform 700ms ease-out',
+                opacity: isLoaded ? Math.max(0.4, progressScale) : 0,
+                transition: 'opacity 700ms ease-out, transform 700ms ease-out, filter 700ms ease-out',
+                filter: `saturate(${1 + progressScale})`,
                 willChange: 'transform, opacity'
               }}
             />
