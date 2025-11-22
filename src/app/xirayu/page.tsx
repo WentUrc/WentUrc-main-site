@@ -257,16 +257,20 @@ export default function XirayuPage() {
   }, [measure]);
 
   const progressPercentage = Math.max(0, ((activeIdx + 1) / Math.max(1, SECTIONS.length)) * 100);
+  const progressScale = Math.min(Math.max(progressPercentage / 100, 0), 1);
+  const heroOpacity = isLoaded ? (activeIdx >= 0 ? 0.8 : 1) : 0;
 
   return (
     <main className="relative w-full bg-black text-white overflow-x-hidden">
       <Link
         href="/"
-        className={`fixed top-6 left-6 md:top-8 md:left-8 z-50 p-2 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-md transition-all duration-500 group
+        className={`fixed top-6 left-5 md:top-8 md:left-10 lg:left-16 z-50 inline-flex items-center gap-2 text-xs md:text-sm font-light tracking-[0.45em] uppercase text-white/70 hover:text-white transition-all duration-500 group
           ${isLoaded ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"}
         `}
+        style={{ fontFamily: 'var(--font-geist-mono)' }}
       >
-        <ArrowLeft className="w-5 h-5 text-white/70 group-hover:text-white" />
+        <ArrowLeft className="w-4 h-4 transition-transform duration-300 ease-out group-hover:-translate-x-1" />
+        <span className="tracking-[0.55em]">BACK</span>
       </Link>
 
       <FlowingSphereBackground
@@ -284,12 +288,11 @@ export default function XirayuPage() {
 
       <div className="fixed inset-0 z-10 flex flex-col px-5 md:px-10 lg:px-16 pointer-events-none">
         <div
-          className={`origin-bottom-left absolute left-5 md:left-10 lg:left-16 bottom-12 md:bottom-24 w-full max-w-4xl transition-opacity duration-1000 ease-out pr-4
-            ${isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}
-          `}
+          className="origin-bottom-left absolute left-5 md:left-10 lg:left-16 bottom-12 md:bottom-24 w-full max-w-4xl pr-4 pointer-events-none"
           style={{
             transform: `translate3d(${titleState.x}px, ${titleState.y}px, 0) scale(${titleState.scale})`,
-            opacity: activeIdx >= 0 ? 0.8 : 1,
+            opacity: heroOpacity,
+            transition: 'opacity 700ms ease-out, transform 600ms ease-out',
             willChange: 'transform, opacity'
           }}
         >
@@ -305,8 +308,13 @@ export default function XirayuPage() {
           <div className="relative max-w-2xl pointer-events-none">
             <div className="absolute bottom-0 left-0 w-full h-[1px] bg-white/10" />
             <div
-              className={`absolute bottom-0 left-0 h-[2px] bg-cyan-400 shadow-[0_0_15px_rgba(34,211,238,0.6)] transition-all duration-700 ease-out ${isLoaded ? "opacity-100" : "opacity-0"}`}
-              style={{ width: `${progressPercentage}%` }}
+              className="absolute bottom-0 left-0 h-[2px] w-full bg-cyan-400 shadow-[0_0_15px_rgba(34,211,238,0.6)] origin-left"
+              style={{
+                transform: `scaleX(${isLoaded ? progressScale : 0})`,
+                opacity: isLoaded ? 1 : 0,
+                transition: 'opacity 700ms ease-out, transform 700ms ease-out',
+                willChange: 'transform, opacity'
+              }}
             />
 
             {SECTIONS.map((section, index) => {
