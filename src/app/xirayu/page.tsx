@@ -4,6 +4,7 @@ import { useEffect, useRef, useState, useMemo, useCallback } from "react";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import FlowingSphereBackground from "@/components/ui/FlowingSphere";
+import StaggeredMenu from "@/components/ui/StaggeredMenu";
 
 const baseConfig = {
   noise: 0.0,
@@ -16,6 +17,20 @@ const baseConfig = {
   scale: 1.0,
   offsetY: 0.0,
 } as const;
+
+const menuItems = [
+  { label: 'Home', ariaLabel: 'Go to home page', link: '/' },
+  { label: 'About', ariaLabel: 'Learn about me', link: 'https://github.com/WentUrc' },
+  { label: 'Note', ariaLabel: 'View my notes', link: 'https://note.wenturc.com' },
+  { label: 'Chat', ariaLabel: 'Join the chat room', link: 'https://chat.wenturc.com' },
+  { label: 'Services', ariaLabel: 'View my services', link: 'https://status.wenturc.com' },
+];
+
+const socialItems = [
+  { label: 'Twitter', link: 'https://twitter.com/Cedar2352' },
+  { label: 'GitHub', link: 'https://github.com/WentUrc' },
+  { label: 'Bilibili', link: 'https://space.bilibili.com/523637242' },
+];
 
 const RAW_CONTENT = [
   { type: "heading", text: "Another Story - Inspired by Maya from Arcaea" },
@@ -272,6 +287,30 @@ export default function XirayuPage() {
         <ArrowLeft className="w-4 h-4 transition-transform duration-300 ease-out group-hover:-translate-x-1" />
         <span className="tracking-[0.55em]">BACK</span>
       </Link>
+
+      <StaggeredMenu
+        position="right"
+        items={menuItems}
+        socialItems={socialItems}
+        displaySocials={true}
+        displayItemNumbering={true}
+        menuButtonColor="rgba(255, 255, 255, 0.7)"
+        openMenuButtonColor="#000000"
+        changeMenuColorOnOpen={true}
+        colors={['#9eb6efff', '#2788ffff']}
+        accentColor="#6ba9ffff"
+        onMenuOpen={() => console.log('Menu opened')}
+        onMenuClose={() => console.log('Menu closed')}
+        isFixed={true}
+        displayLogo={false}
+        toggleClassName={`
+          fixed top-6 right-5 md:top-8 md:right-10 lg:right-16 z-50 
+          text-xs md:text-sm font-light tracking-[0.45em] uppercase 
+          transition-all duration-500 hover:text-white
+          ${isLoaded ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"}
+        `}
+        toggleStyle={{ fontFamily: 'var(--font-geist-mono)' }}
+      />
 
       <FlowingSphereBackground
         className={`pointer-events-none select-none fixed inset-0 transition-opacity duration-[1200ms] ease-out ${isLoaded ? "opacity-100" : "opacity-0"}`}
