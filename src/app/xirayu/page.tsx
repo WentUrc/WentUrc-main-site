@@ -98,7 +98,9 @@ const RAW_CONTENT = [
 
   { type: "paragraph", text: 'The mirror now reflected only her face: her short hair like moonlight, her tall animal ears, and the pale yellow flower on her chest. Winding paths extended to her left and right and the Spirit Wind brushed through her hair. She felt brand new, as if someone had finally noticed her and a steady hand rested gently on her back.' },
 
-  { type: "paragraph", text: 'Wanting happiness was nothing to be ashamed of, and feeling sadness was not disgraceful either. Xirayu turned around and took the first step forward.' }
+  { type: "paragraph", text: 'Wanting happiness was nothing to be ashamed of, and feeling sadness was not disgraceful either. ' },
+
+  { type: "paragraph", text: 'Xirayu turned around and took the first step forward. '}
 ];
 
 const HERO_TITLE = RAW_CONTENT[0].text;
