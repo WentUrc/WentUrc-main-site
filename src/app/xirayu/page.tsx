@@ -109,8 +109,8 @@ const HERO_SCROLL_RANGE = 60;
 
 const PARAGRAPHS_PER_SECTION = {
   mobile: 1,
-  tablet: 2,
-  desktop: 3,
+  tablet: 1,
+  desktop: 1,
 };
 
 function chunkArray<T>(arr: T[], size: number): T[][] {
@@ -172,7 +172,6 @@ export default function XirayuPage() {
       ? window.scrollY
       : scrollElement.scrollTop;
     const vh = window.innerHeight;
-
     const heroProgress = Math.min(Math.max(scrollY / (vh * (HERO_SCROLL_RANGE / 100)), 0), 1);
 
     setTitleState({
@@ -198,9 +197,7 @@ export default function XirayuPage() {
   useEffect(() => {
     const root = document.documentElement;
     const originalScrollBehavior = root.style.scrollBehavior;
-
     const hasScrollRestoration = typeof window !== 'undefined' && 'scrollRestoration' in window.history;
-    // 使用明确类型替代 'any'，以满足 eslint 规则
     const historyObj = window.history as History & { scrollRestoration?: History['scrollRestoration'] };
     const originalScrollRestoration = hasScrollRestoration ? historyObj.scrollRestoration : null;
 
