@@ -23,7 +23,7 @@ const menuItems = [
   { label: 'About', ariaLabel: 'Learn about me', link: 'https://github.com/WentUrc' },
   { label: 'Note', ariaLabel: 'View my notes', link: 'https://note.wenturc.com' },
   { label: 'Chat', ariaLabel: 'Join the chat room', link: 'https://chat.wenturc.com' },
-  { label: 'Services', ariaLabel: 'View my services', link: 'https://status.wenturc.com' },
+  { label: 'Status', ariaLabel: 'View my services', link: 'https://status.wenturc.com' },
 ];
 
 const socialItems = [
