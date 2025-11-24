@@ -2,9 +2,6 @@
 
 import { useEffect, useRef } from 'react';
 
-/**
- * 流光星蕴球背景组件配置接口
- */
 export interface FlowingSphereConfig {
   /** 辉光强度 (0.0 - 1.0+) 默认: 0.42 */
   glow?: number;
@@ -290,7 +287,7 @@ export default function FlowingSphereBackground({
     <div
       ref={containerRef}
       className={`fixed inset-0 w-screen h-screen overflow-hidden bg-black -z-[1] ${className}`}
-      style={style} // 保留 style 允许外部特殊覆盖
+      style={style}
     />
   );
 }
