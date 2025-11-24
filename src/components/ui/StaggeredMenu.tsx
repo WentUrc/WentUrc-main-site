@@ -75,6 +75,12 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
   const toggleBtnRef = useRef<HTMLButtonElement | null>(null);
   const busyRef = useRef(false);
   const itemEntranceTweenRef = useRef<gsap.core.Tween | null>(null);
+  const scrollLockRef = useRef<{
+    bodyOverflow: string;
+    bodyPaddingRight: string;
+    rootOverflow: string;
+    rootPaddingRight: string;
+  } | null>(null);
   const initialHiddenClass = position === 'left' ? '-translate-x-full' : 'translate-x-full';
 
   useLayoutEffect(() => {
@@ -336,6 +342,17 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
     });
   }, []);
 
+  const closeMenu = useCallback(() => {
+    if (!openRef.current) return;
+    openRef.current = false;
+    setOpen(false);
+    onMenuClose?.();
+    playClose();
+    animateIcon(false);
+    animateColor(false);
+    animateText(false);
+  }, [animateColor, animateIcon, animateText, onMenuClose, playClose]);
+
   const toggleMenu = useCallback(() => {
     const target = !openRef.current;
     openRef.current = target;
@@ -353,6 +370,69 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
     animateColor(target);
     animateText(target);
   }, [playOpen, playClose, animateIcon, animateColor, animateText, onMenuOpen, onMenuClose]);
+
+  React.useEffect(() => {
+    const handlePointerDown = (event: PointerEvent) => {
+      if (!openRef.current) return;
+      const target = event.target as Node | null;
+      if (!target) return;
+      const panel = panelRef.current;
+      const toggle = toggleBtnRef.current;
+      if ((panel && panel.contains(target)) || (toggle && toggle.contains(target))) return;
+      closeMenu();
+    };
+
+    document.addEventListener('pointerdown', handlePointerDown, true);
+    return () => {
+      document.removeEventListener('pointerdown', handlePointerDown, true);
+    };
+  }, [closeMenu]);
+
+  React.useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    const body = document.body;
+    const root = document.documentElement;
+
+    if (!body || !root) return;
+
+    const releaseLock = () => {
+      if (!scrollLockRef.current) return;
+      body.style.overflow = scrollLockRef.current.bodyOverflow;
+      body.style.paddingRight = scrollLockRef.current.bodyPaddingRight;
+      root.style.overflow = scrollLockRef.current.rootOverflow;
+      root.style.paddingRight = scrollLockRef.current.rootPaddingRight;
+      scrollLockRef.current = null;
+    };
+
+    if (open) {
+      if (!scrollLockRef.current) {
+        const scrollBarWidth = window.innerWidth - root.clientWidth;
+        scrollLockRef.current = {
+          bodyOverflow: body.style.overflow,
+          bodyPaddingRight: body.style.paddingRight,
+          rootOverflow: root.style.overflow,
+          rootPaddingRight: root.style.paddingRight
+        };
+
+        body.style.overflow = 'hidden';
+        root.style.overflow = 'hidden';
+
+        if (scrollBarWidth > 0) {
+          const bodyPadding = parseFloat(getComputedStyle(body).paddingRight || '0') || 0;
+          const rootPadding = parseFloat(getComputedStyle(root).paddingRight || '0') || 0;
+          body.style.paddingRight = `${bodyPadding + scrollBarWidth}px`;
+          root.style.paddingRight = `${rootPadding + scrollBarWidth}px`;
+        }
+      }
+    } else {
+      releaseLock();
+    }
+
+    return () => {
+      releaseLock();
+    };
+  }, [open]);
 
   return (
     <div
@@ -550,8 +630,9 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
 .sm-scope .sm-panel-item:hover { color: var(--sm-accent, #ff0000); }
 .sm-scope .sm-panel-list[data-numbering] { counter-reset: smItem; }
 .sm-scope .sm-panel-list[data-numbering] .sm-panel-item::after { counter-increment: smItem; content: counter(smItem, decimal-leading-zero); position: absolute; top: 0.1em; right: 3.2em; font-size: 18px; font-weight: 400; color: var(--sm-accent, #ff0000); letter-spacing: 0; pointer-events: none; user-select: none; opacity: var(--sm-num-opacity, 0); }
-@media (max-width: 1024px) { .sm-scope .staggered-menu-panel { width: 100%; left: 0; right: 0; } .sm-scope .staggered-menu-wrapper[data-open] .sm-logo-img { filter: invert(100%); } }
-@media (max-width: 640px) { .sm-scope .staggered-menu-panel { width: 100%; left: 0; right: 0; } .sm-scope .staggered-menu-wrapper[data-open] .sm-logo-img { filter: invert(100%); } }
+@media (max-width: 1024px) { .sm-scope .staggered-menu-panel { width: 100%; left: 0; right: 0; } .sm-scope .sm-prelayers { width: 100%; left: 0; right: 0; } .sm-scope .staggered-menu-wrapper[data-open] .sm-logo-img { filter: invert(100%); } }
+@media (max-width: 640px) { .sm-scope .staggered-menu-panel { width: 100%; left: 0; right: 0; } .sm-scope .sm-prelayers { width: 100%; left: 0; right: 0; } .sm-scope .staggered-menu-wrapper[data-open] .sm-logo-img { filter: invert(100%); } }
+@media (min-width: 1024px) { .sm-scope .staggered-menu-wrapper[data-open] .sm-toggle { transform: translateX(30px); } }
       `}</style>
     </div>
   );
