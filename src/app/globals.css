@@ -8,7 +8,6 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  /* WentUrc brand tokens */
   --color-brand: #2563eb; /* primary */
   --color-brand-foreground: #ffffff;
   --color-accent: #22d3ee; /* secondary */

@@ -5,7 +5,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "github.wenturc.com",
+        hostname: "gh.Revaea.com",
       },
       {
         protocol: "https",

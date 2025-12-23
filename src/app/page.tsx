@@ -29,7 +29,7 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-6 lg:gap-4 items-center">
             <div className="max-w-3xl lg:text-right w-full lg:w-auto mt-6 lg:mt-0 lg:ml-auto lg:mr-16 lg:pr-4">
                 <h1 className="font-sans text-5xl/tight sm:text-5xl/tight md:text-5xl/tight lg:text-7xl/tight font-semibold tracking-tight text-center lg:text-right">
-                  <BlurText as="span" text="WentUrc" animateBy="letters" />
+                  <BlurText as="span" text="Revaea" animateBy="letters" />
                   <BlurText as="span" className="block text-brand" text="理解, 包容, 友善" animateBy="words" />
                 </h1>
                 <BlurText
@@ -41,12 +41,12 @@ export default function Home() {
                 />
                 <div className="mt-8 flex items-center gap-6">
                   <GlassReveal delayMs={100}>
-                    <Link href="https://status.wenturc.com/status/all" className="inline-flex h-11 items-center px-6 text-sm font-medium text-brand-foreground bg-brand rounded-md shadow hover:opacity-90 transition-all">
+                    <Link href="https://status.Revaea.com/status/all" className="inline-flex h-11 items-center px-6 text-sm font-medium text-brand-foreground bg-brand rounded-md shadow hover:opacity-90 transition-all">
                       当前状态
                     </Link>
                   </GlassReveal>
                   <GlassReveal delayMs={250}>
-                    <Link href="https://github.com/wenturc" className="inline-flex h-11 items-center px-6 text-sm font-medium border rounded-md hover:bg-black/[.04] dark:hover:bg-white/[.06] transition-all">
+                    <Link href="https://github.com/Revaea" className="inline-flex h-11 items-center px-6 text-sm font-medium border rounded-md hover:bg-black/[.04] dark:hover:bg-white/[.06] transition-all">
                       当前存档
                     </Link>
                   </GlassReveal>
@@ -81,7 +81,7 @@ export default function Home() {
               <GlassReveal className="relative z-10 flex items-center" delayMs={200} rounded="rounded-2xl lg:rounded-3xl">
                 <Image 
                   src="/WentUrc-2.png"
-                  alt="WentUrc" 
+                  alt="Revaea" 
                   width={500}
                   height={500}
                   className="w-auto h-auto max-h-[300px] sm:max-h-[350px] md:max-h-[400px] lg:max-h-[500px] object-contain select-none"
