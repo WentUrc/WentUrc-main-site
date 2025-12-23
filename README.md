@@ -1,3 +1,3 @@
-# WentUrc Main Site
+# Revaea Main Site
 
-This is the main site for WentUrc.
+This is the main site for Revaea.
