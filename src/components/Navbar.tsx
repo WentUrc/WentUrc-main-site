@@ -17,7 +17,7 @@ export default function Navbar() {
     <header className="sticky top-0 z-40 w-full border-b border-black/5 dark:border-white/10 backdrop-blur supports-[backdrop-filter]:bg-background/70">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2 font-semibold">
-          <Image src="/logo.png" alt="Revaea logo" width={24} height={24} priority />
+          <Image src="/favicon.ico" alt="Revaea logo" width={24} height={24} priority />
           <span>Revaea</span>
         </Link>
         <nav className="hidden md:flex items-center gap-6 text-sm">

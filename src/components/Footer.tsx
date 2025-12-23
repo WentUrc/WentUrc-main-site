@@ -18,7 +18,7 @@ export default function Footer() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 grid gap-8 md:grid-cols-3 text-sm text-muted">
         <div>
           <div className="flex items-center gap-2 font-semibold mb-2">
-            <Image src="/logo.png" alt="Revaea logo" width={24} height={24} />
+            <Image src="/favicon.ico" alt="Revaea logo" width={24} height={24} />
             <span>Revaea</span>
           </div>
           <p className="text-muted">路很长，梦还在</p>

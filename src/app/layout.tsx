@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     description: "一个由心念共振所编织的世界：慢与温柔为节拍，爱可唤星辰。",
   },
   icons: {
-    icon: "/logo.png",
+    icon: "/favicon.ico",
   },
 };
 
