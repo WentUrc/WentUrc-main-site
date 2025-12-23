@@ -26,8 +26,8 @@ export default function Footer() {
         <div>
           <div className="font-medium mb-2">导航</div>
           <ul className="space-y-1">
-            <li><Link href="https://chat.Revaea.com" className="hover:text-brand flex items-center gap-1"><MessageSquare className="h-4 w-4" />聊天室</Link></li>
-            <li><Link href="https://note.Revaea.com" className="hover:text-brand flex items-center gap-1"><NotebookText className="h-4 w-4" />笔记屋</Link></li>
+            <li><Link href="https://c.Revaea.com" className="hover:text-brand flex items-center gap-1"><MessageSquare className="h-4 w-4" />聊天室</Link></li>
+            <li><Link href="https://n.Revaea.com" className="hover:text-brand flex items-center gap-1"><NotebookText className="h-4 w-4" />笔记屋</Link></li>
           </ul>
         </div>
         <div>
