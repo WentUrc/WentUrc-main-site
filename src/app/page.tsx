@@ -41,7 +41,7 @@ export default function Home() {
                 />
                 <div className="mt-8 flex items-center gap-6">
                   <GlassReveal delayMs={100}>
-                    <Link href="https://status.Revaea.com/status/all" className="inline-flex h-11 items-center px-6 text-sm font-medium text-brand-foreground bg-brand rounded-md shadow hover:opacity-90 transition-all">
+                    <Link href="https://st.Revaea.com/status/all" className="inline-flex h-11 items-center px-6 text-sm font-medium text-brand-foreground bg-brand rounded-md shadow hover:opacity-90 transition-all">
                       当前状态
                     </Link>
                   </GlassReveal>
