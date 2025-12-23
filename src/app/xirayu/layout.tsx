@@ -1,7 +1,30 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Xirayu | Revaea - 心念织梦之界",
+  title: {
+    absolute: "Xirayu — The Rain of Oblivion | Revaea", 
+  },
+
+  description: "If IGCrystal looks toward the future, Xirayu lingers in the past. Explore a realm of nostalgia where memories refuse to fade.", 
+
+  openGraph: {
+    title: "Xirayu — The Rain of Oblivion",
+    description: "Time settles like dust in the fading light. Old fragments float like stars beneath the water, shimmering yet unreachable. A quiet frost on old scars, where time has no echo.",
+    locale: "en_US", 
+    url: "https://revaea.com/xirayu",
+    images: [
+      {
+        url: "/revaea-2.png", 
+        width: 2816,          
+        height: 1536,
+        alt: "Xirayu Character Art",
+      },
+    ],
+  },
+  
+  alternates: {
+    canonical: "/xirayu",
+  },
 };
 
 export default function XirayuLayout({
