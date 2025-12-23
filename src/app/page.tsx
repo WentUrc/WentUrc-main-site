@@ -80,7 +80,7 @@ export default function Home() {
               </div>
               <GlassReveal className="relative z-10 flex items-center" delayMs={200} rounded="rounded-2xl lg:rounded-3xl">
                 <Image 
-                  src="/WentUrc-2.png"
+                  src="/revaea-2.png"
                   alt="Revaea" 
                   width={500}
                   height={500}
