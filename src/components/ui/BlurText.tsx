@@ -21,7 +21,7 @@ export interface BlurTextProps {
   easing?: ((t: number) => number) | string;
   onAnimationComplete?: () => void;
   stepDuration?: number; // seconds per step
-  as?: "p" | "span" | "div";
+  as?: "p" | "span" | "div" | "h1";
 }
 
 const clamp01 = (v: number) => (v < 0 ? 0 : v > 1 ? 1 : v);
@@ -79,9 +79,9 @@ export default function BlurText({
   as = "p",
 }: BlurTextProps) {
   const completionFired = useRef(false);
-  type RootEl = HTMLParagraphElement | HTMLSpanElement | HTMLDivElement;
+  type RootEl = HTMLParagraphElement | HTMLSpanElement | HTMLDivElement | HTMLHeadingElement;
   const rootRef = useRef<RootEl | null>(null);
-  const setRootRef = (el: HTMLParagraphElement | HTMLSpanElement | HTMLDivElement | null) => {
+  const setRootRef = (el: RootEl | null) => {
     rootRef.current = el;
   };
   const [inView, setInView] = useState(false);
