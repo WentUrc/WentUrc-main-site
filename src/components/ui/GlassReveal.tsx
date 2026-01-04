@@ -18,8 +18,8 @@ export default function GlassReveal({ children, delayMs = 0, className = "", rou
 
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (prefersReduced) {
-      setVisible(true);
-      return;
+      const rafId = requestAnimationFrame(() => setVisible(true));
+      return () => cancelAnimationFrame(rafId);
     }
 
     const observer = new IntersectionObserver(
