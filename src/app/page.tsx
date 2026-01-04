@@ -52,8 +52,33 @@ export default function Home() {
                   </GlassReveal>
                 </div>
                 <div className="mt-6 flex items-center gap-6 text-xs text-muted-foreground">
-                  <div><BlurText as="span" text="白湖婲" animateBy="letters" stepDuration={0.25} /></div>
-                  <div><BlurText as="span" text="甜则塔" animateBy="letters" stepDuration={0.25} /></div>
+                  <div>
+                    <Link
+                      href="https://github.com/BayHyn"
+                      className="inline-flex items-center gap-1.5 text-brand hover:text-brand/90 underline underline-offset-4 decoration-brand/60 transition-colors group"
+                    >
+                        <BlurText as="span" text="白湖婲" animateBy="letters" stepDuration={0.25} />
+                      <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    </Link>
+                  </div>
+                  <div>
+                    <Link
+                      href="https://github.com/Tianzelle"
+                      className="inline-flex items-center gap-1.5 text-brand hover:text-brand/90 underline underline-offset-4 decoration-brand/60 transition-colors group"
+                    >
+                        <BlurText as="span" text="甜则塔" animateBy="letters" stepDuration={0.25} />
+                      <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    </Link>
+                  </div>
+                  <div>
+                    <Link
+                      href="https://github.com/Lucodia"
+                      className="inline-flex items-center gap-1.5 text-brand hover:text-brand/90 underline underline-offset-4 decoration-brand/60 transition-colors group"
+                    >
+                        <BlurText as="span" text="鹿弥音" animateBy="letters" stepDuration={0.25} />
+                      <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    </Link>
+                  </div>
                   <div>
                     <Link
                       href="/xirayu"
