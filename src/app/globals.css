@@ -53,3 +53,18 @@ main section {
   position: relative;
   overflow: hidden;
 }
+
+@keyframes revaea-nebula-drift {
+  0% {
+    transform: translate3d(-2%, -1%, 0) scale(1.06);
+    opacity: 0.85;
+  }
+  50% {
+    transform: translate3d(2%, 1%, 0) scale(1.12);
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(-2%, -1%, 0) scale(1.06);
+    opacity: 0.85;
+  }
+}

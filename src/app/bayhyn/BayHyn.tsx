@@ -50,11 +50,11 @@ export default function BayHynShell({ children }: { children: React.ReactNode })
         menuButtonColor="rgba(255, 255, 255, 0.7)"
         openMenuButtonColor="#000000"
         changeMenuColorOnOpen={true}
-        colors={["#9eb6efff", "#2788ffff"]} 
-        accentColor="#38bdf8"
+        colors={["#b4a2fdff", "#a855f7ff"]}
+        accentColor="#c793ffff"
         isFixed={true}
         displayLogo={false}
-        toggleClassName="fixed top-6 right-5 md:top-8 md:right-10 lg:right-16 z-50 text-xs md:text-sm font-light tracking-[0.45em] uppercase transition-all duration-500 hover:text-white mix-blend-difference"
+        toggleClassName="fixed top-6 right-5 md:top-8 md:right-10 lg:right-16 z-50 text-xs md:text-sm font-light tracking-[0.45em] uppercase text-white/70 transition-all duration-500 hover:text-white mix-blend-difference"
         toggleStyle={{ fontFamily: "var(--font-geist-mono)" }}
       />
 
@@ -68,8 +68,8 @@ export default function BayHynShell({ children }: { children: React.ReactNode })
             attractionStrength={0}
             saturation={saturation}
         >
-          <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-slate-950/40 via-transparent to-slate-950/70" />
-          <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_30%_20%,theme(colors.sky.400/0.10),transparent_55%),radial-gradient(circle_at_70%_75%,theme(colors.indigo.400/0.10),transparent_50%)]" />
+          <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-purple-950/30 via-fuchsia-950/10 to-slate-950/75" />
+          <div className="absolute -inset-[18%] pointer-events-none will-change-transform bg-[radial-gradient(circle_at_28%_18%,theme(colors.fuchsia.300/0.14),transparent_55%),radial-gradient(circle_at_72%_78%,theme(colors.violet.300/0.12),transparent_50%)] animate-[revaea-nebula-drift_18s_ease-in-out_infinite] motion-reduce:animate-none" />
         </Whirlpool>
       </div>
 
