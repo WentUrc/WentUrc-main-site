@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import FlowingSphereBackground from "@/components/ui/FlowingSphere";
+import StarfieldWarp from "@/components/ui/StarfieldWarp";
 import StaggeredMenu from "@/components/ui/StaggeredMenu";
 import { MENU_ITEMS, SOCIAL_ITEMS } from "@/config/menu";
 
@@ -88,6 +89,15 @@ export default function XirayuShell({
         style={{ zIndex: 0 }}
         config={pageConfig}
         saturationOverride={saturation}
+      />
+
+      <StarfieldWarp
+        count={screenSize === "mobile" ? 140 : 220}
+        color="#3c5c6f6a"
+        className={`pointer-events-none select-none fixed inset-0 transition-opacity duration-[1200ms] ease-out ${
+          isLoaded ? "opacity-100" : "opacity-0"
+        }`}
+        style={{ zIndex: 0, opacity: isLoaded ? 0.55 : 0 }}
       />
 
       <div
