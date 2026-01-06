@@ -261,7 +261,7 @@ export default function BayHynPage() {
           />
         )}
         blocks={STORY_PARAGRAPHS}
-        progressBarClassName="absolute bottom-0 left-0 h-[2px] w-full bg-sky-300 origin-left"
+        progressBarClassName="absolute bottom-0 left-0 h-[2px] w-full bg-purple-300 origin-left"
       />
     </div>
   );
