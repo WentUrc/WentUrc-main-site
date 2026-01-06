@@ -1,148 +1,219 @@
 'use client';
 
-import { useEffect, useRef, useState, useMemo, useCallback } from "react";
-import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
-import FlowingSphereBackground from "@/components/ui/FlowingSphere";
-import StaggeredMenu from "@/components/ui/StaggeredMenu";
-
-const baseConfig = {
-  noise: 0.0,
-  bloom: 1.21,
-  hueShift: -0.03,
-  satMin: 0.0,
-  satMax: 2.5,
-  satSpeed: 0.0,
-  radius: 0.5,
-  scale: 1.0,
-  offsetY: 0.0,
-} as const;
-
-const menuItems = [
-  { label: 'Home', ariaLabel: 'Go to home page', link: '/' },
-  { label: 'About', ariaLabel: 'Learn about me', link: 'https://github.com/Revaea' },
-  { label: 'Note', ariaLabel: 'View my notes', link: 'https://note.Revaea.com' },
-  { label: 'Chat', ariaLabel: 'Join the chat room', link: 'https://chat.Revaea.com' },
-  { label: 'Status', ariaLabel: 'View my services', link: 'https://status.Revaea.com' },
-];
-
-const socialItems = [
-  { label: 'Twitter', link: 'https://twitter.com/Cedar2352' },
-  { label: 'GitHub', link: 'https://github.com/Revaea' },
-  { label: 'Bilibili', link: 'https://space.bilibili.com/523637242' },
-];
+import { useState } from "react";
+import StoryScroller from "@/components/ui/StoryScroller";
+import XirayuShell from "./Xirayu";
 
 const RAW_CONTENT = [
-  { type: "heading", text: "Another Story - Inspired by Maya from Arcaea" },
+  { type: "heading", text: "The Rain of Oblivion" },
 
-  { type: "paragraph", text: 'Starlight climbed upon her cheek, reflecting upon her short hair white as the first snow. She was the second maiden born beneath the starlight. Many "Dream Weavers" had walked this land named Revaea before her.' },
-
-  { type: "paragraph", text: 'Not long ago, the harmonious world woven from countless pure intentions welcomed its first note of "Dissonance." That note drew a boundary between tranquil Soul-Flow and violent grief. The sky of Spirit Winds had been lit up twice.' },
-
-  { type: "paragraph", text: 'Two lives drifted from beyond the heavens, falling like meteors and piercing the veil of thoughts to arrive here. She seemed like the reverse side of a coin — the other face of the maiden who came before her. The sky was dotted with deep purple Aether.' },
-
-  { type: "paragraph", text: 'There were no clouds or moon, only the silent silhouettes of floating islands. When she first woke, Xirayu could not see her surroundings clearly because tears blurred her vision. Consciousness and sensation had only just returned.' },
-
-  { type: "paragraph", text: 'Grief then struck like an overwhelming sea, forcing her to cover her face in agony. Her large, soft animal ears drooped weakly, pressed almost flat against her hair. Tears flowed uncontrollably.' },
-
-  { type: "paragraph", text: 'In this world where "Mind is Truth," her shattered soul triggered a collapse in the surrounding reality. Every visitor to Revaea experiences a rebirth; having "nothing" does not exist here. As long as one has a "Heart," one possesses everything.' },
-
-  { type: "paragraph", text: 'But Revaea was too "perfect" for her. Since "The End of All Things," her heart had been riddled with holes and she had suffered irreversible damage. The Spirit Winds poured effort into soothing her scars, but those efforts proved futile.' },
-
-  { type: "paragraph", text: 'In a world where many could "Manifest" happiness, she seemed only able to manifest despair. She did not truly reject the darkness; in a closed loop of dead silence she felt a strange comfort. The contrast made her misfortune more acute.' },
-
-  { type: "paragraph", text: 'Occasional golden beams of light flashed through the darkness from nearby "Telepathic Conduit Arrays," the physical forms of others\' joy. To her, they were hideous and painful, stinging her eyes. Laughter from the "Phantom Art Gardens" and Spirit Songs from distant islands aggravated her.' },
-
-  { type: "paragraph", text: 'Her sensitive, fluffy ears trembled as if pierced by a storm whenever sound intruded. If anything stole away the night and silence she loved, the cradle of memory would still hold her up. Even if she did not belong here, the World Will of Revaea loved her incomparably.' },
-
-  { type: "paragraph", text: 'This peculiar girl loved to sleep and cry; her petite frame and short pale hair made her look like a small lost beast. She wore a blue and white dress that seemed out of place with her sorrow. Pale yellow flower decorations at her waist swayed with her trembling.' },
-
-  { type: "paragraph", text: 'Revaea pitied her and tried to "Resonate" with her, but she did not much care for these kindnesses. She feared the glittering "Mind Crystals" and preferred the depth of endless night. Benevolent thoughts surged like a tide and she desperately needed a hiding place.' },
-
-  { type: "paragraph", text: 'Those thoughts tried ceaselessly to heal her and she could not bear the disturbance. Amid Gothic shadows and ruined illusions, Xirayu sought quiet corners and familiar caves to insulate herself from "Resonance." She made a habit of finding places that refracted less light.' },
-
-  { type: "paragraph", text: 'Even so, the omnipresent gentle magic was hard to block completely. She crossed mountains and rivers, climbed the highest floating islands, and trod into the deepest forests in search of absolute silence. She walked and walked until she stepped out of a dim passage of her subconscious.' },
-
-  { type: "paragraph", text: 'Ahead she finally saw the boundary between reality and mental imagery and stopped. The sounds she heard were hysterical screams and the scenes before her were the culprits. Bright pillars of light descended from the heavens, tearing the earth apart.' },
-
-  { type: "paragraph", text: 'Her old home had been destroyed and the images tortured her. She wished the pain would last only seconds, but the torture dragged on for hours and hurt unbearably. She recognized faces that should have been dead.' },
-
-  { type: "paragraph", text: 'A voice once commanded her and froze her in place, but that voice soon dissipated. All her connections and bonds with that past world turned to nothingness during that slow, ruthless disaster. She lost everything and then woke in Revaea, still alone.' },
-
-  { type: "paragraph", text: 'The horizon that should have been a soft dawn was dyed crimson by her imagery, resembling a sea of fire. Tormented by auditory and visual hallucinations, Xirayu knelt at the passage exit. Sharp pain pierced her heart like a blade.' },
-
-  { type: "paragraph", text: 'Her pain and grief were silent yet deafening, causing turbulence in the surrounding Spirit Winds. Revaea heard and felt this violent "Negative Resonance." She sat at the edge between self-closure and the open world, with voices tearing at her eardrums.' },
-
-  { type: "paragraph", text: 'Her deep eyes stared blankly into the distance, begging that she no longer needed to think or to "Manifest" anything. It was too late to undo the tragedy; time could not flow backward. Still, she wondered if anything could be done—could her tears be wiped away, her scars smoothed?' },
-
-  { type: "paragraph", text: 'A "Plume of Will," condensed from pure benevolence, floated down and more plumes gathered like glowing drizzle. They formed a cocoon-like barrier by "Dream Weaving Arts," isolating her from the blinding light of hope. The plumes sought to calm, distract, or coax her, but her attention remained scattered.' },
-
-  { type: "paragraph", text: 'To match her mood, the Plumes of Will darkened and folded like delicate, cloud-woven fabric until they wrapped her completely. Xirayu raised her head and saw within the barrier not others\' happiness but memories gently reconstructed. The protagonists in those memories were others carrying sadness and mistakes.' },
-
-  { type: "paragraph", text: 'Revaea had no memories of war, so it showed spiritual dilemmas its residents once faced. She watched quietly as lonely and helpless people wept in the "Clean Tea Dream Circle" and searched the "Memory Library." Even in a magical world, loneliness felt terminal and without cure.' },
-
-  { type: "paragraph", text: 'She saw people of all kinds conversing with shadows in their hearts and clutching fading Mind Crystals representing things passed. The world seemed to tell her she might never be happy again and could give up, but why must it be so? The past is past, yet some brands you bear are shackles you placed upon yourself.' },
-
-  { type: "paragraph", text: 'You are still alive, and in Revaea where the heart beats, there is the world. A whisper—"Please... Stay."—answered another whisper, and this was the first time she had spoken since arriving. Her voice came through Mind-Sense, hoarse and barely audible.' },
-
-  { type: "paragraph", text: 'She repeated part of the World Will\'s whisper, gritted her teeth, and her childish face twisted with pain. Although Revaea had given her much love, her response was resentment. Her gaze sharpened and she glared at the barrier of Plumes of Will.' },
-
-  { type: "paragraph", text: 'The Ocean of Mind rippled as scenes inside shifted with the flow of her energy. She watched inner struggles: a man reshaping his face only to see darkness, a woman standing by Silver Vines, and a child in black whose sister was rebuffed. Xirayu smiled silently, treating these attempts to resonate with her as pathetic.' },
-
-  { type: "paragraph", text: 'Despite her disdain, those resonations did affect her and her broken heart shattered further. The pain the world perceived grew stronger and magical elements began to flip and gather. They showed how other people\'s inner worlds fell apart step by step.' },
-
-  { type: "paragraph", text: 'Suffering, struggles, and failures flashed by, gripping her heart and letting out-of-control mental power climb her limbs like poisonous vines. The power bent and twisted around her like malicious chains until sharp branches pressed against her fragile neck. Yet she only sneered, convinced that the weak beating heart did not belong to her.' },
-
-  { type: "paragraph", text: 'The air trembled as if the entire space shuddered and the light in the barrier extinguished. The chains tightened, squeezing her body, but a twisted cyclone of Spirit Wind then swept through. The magical shackles shattered into countless specks of light.' },
-
-  { type: "paragraph", text: 'She fell to the ground with her blue and white skirt spreading, able to bathe again in the gentle morning glow of distant dawn—Revaea\'s eternal light of healing. Xirayu looked up at the pitch-black sky and then down toward the bright cluster of floating islands, and finally closed her eyes.' },
-
-  { type: "paragraph", text: 'Confusion, anger, and loss swirled within her as the warm light touched her shoulders and warmed her body; she clenched trembling fists. But soon the warmth faded and she opened her eyes again to look into surrounding darkness. Revaea then formed a brand new high wall of Mind Intent.' },
-
-  { type: "paragraph", text: 'At the end of that passage was scattered sunlight made of countless wishes. Xirayu propped herself up and looked half-risen toward that distant point of light where past memories no longer assaulted her mind. Behind her was the huge void she had just passed through — a reality gap born of inner collapse.' },
-
-  { type: "paragraph", text: 'The void was darker and more bottomless than before, with faintly flickering unformed Mind Crystals within it. Caught between two choices, she had to think again: either let the void swallow her or embrace the terrifying, overly real "Soul-Flow." She knelt on both knees as the wind brushed past her furry ears.' },
-
-  { type: "paragraph", text: 'Angrily she asked what she should do: face everything or give up. The world\'s resonance with her soul faintly answered by asking, "What do you want?" Previously she had answers like quieting thoughts, forgetting, disappearing, feeling pain, or becoming happy, but now she felt uncertain.' },
-
-  { type: "paragraph", text: 'She remembered not only the "Ending" but everything she had experienced; that short life had been mostly happy, so the loss felt especially heavy. Guilt gnawed at her, the belief she had taken everything away and would be tortured forever. She considered the options: use "Manifestation Arts" for false happiness or accept judgment that terrified her.' },
-
-  { type: "paragraph", text: 'In this dilemma she felt she had no right to choose, yet if a choice must be made and two clear paths lay before her, she wondered which to take. The era of uncertain paths was over; the field of view widened and clouds thinned. Starlight dimmed and sunlight lost brightness.' },
-
-  { type: "paragraph", text: 'Her greatest wish to suffer on a cliff of despair would not come true, and paradoxically she now gained the right to choose. This was what Revaea wanted to see: every soul playing its own movement, even if the tune is sorrow. She stood up as a high wall of Mind Intent dimmed and the mirror ceased to reflect other memories.' },
-
-  { type: "paragraph", text: 'The mirror now reflected only her face: her short hair like moonlight, her tall animal ears, and the pale yellow flower on her chest. Winding paths extended to her left and right and the Spirit Wind brushed through her hair. She felt brand new, as if someone had finally noticed her and a steady hand rested gently on her back.' },
-
-  { type: "paragraph", text: 'Wanting happiness was nothing to be ashamed of, and feeling sadness was not disgraceful either. ' },
-
-  { type: "paragraph", text: 'Xirayu turned around and took the first step forward. '}
+  {
+    type: "paragraph",
+    text: "Time settles slowly in the air—like a layer of dust-light, stroked again and again, resting upon a past that has not yet fully cooled.",
+  },
+  {
+    type: "paragraph",
+    text: "Fragments of old days drift in the deep of memory, like star-reflections beneath the surface of water: gently wavering, yet refusing to go out.",
+  },
+  {
+    type: "paragraph",
+    text: "When the wind passes, it takes away the sharp outlines, leaving only texture and residual warmth, echoing again and again through blankness.",
+  },
+  {
+    type: "paragraph",
+    text: "Moments once bright are folded into soft pleats and tucked into the dark pocket of years; now and then, a quiet glimmer seeps out, reminding me they never truly left.",
+  },
+  {
+    type: "paragraph",
+    text: "Dusk is always the best hour for remembrance.",
+  },
+  {
+    type: "paragraph",
+    text: "Light becomes hesitant, shadows stretch long, and even meaning itself begins to blur.",
+  },
+  {
+    type: "paragraph",
+    text: "Unfinished emotions, like a stalled tide, keep testing the edge of the heart-lake—never spilling over, only leaving a low, lingering reverberation.",
+  },
+  {
+    type: "paragraph",
+    text: "When night covers everything, memory turns clearer instead.",
+  },
+  {
+    type: "paragraph",
+    text: "It is like frost settling on old marks—cold and transparent, impossible to ignore.",
+  },
+  {
+    type: "paragraph",
+    text: "Remembrance is not a return, but a kind of stillness: letting what is gone slowly develop in time, recovering its original shape in undisturbed darkness.",
+  },
+  {
+    type: "paragraph",
+    text: "When all sounds sink to the bottom and only a breath-like rhythm remains, the past is placed gently, as if properly put away. At the end of silence, remembrance becomes a faint yet enduring light, illuminating the last instant before forgetting.",
+  },
+  {
+    type: "paragraph",
+    text: "If Bingganjing faces the future, then Xiwangyu pauses within memory.",
+  },
+  {
+    type: "paragraph",
+    text: "Everything in the past once felt so beautiful.",
+  },
+  {
+    type: "paragraph",
+    text: "Yellowed photographs hang quietly on the wall, yet thoughts come rushing like a tide, battering every nerve in my mind.",
+  },
+  {
+    type: "paragraph",
+    text: "The warmth in my mother's arms feels as if it still lingers; those first unsteady steps gradually became sure.",
+  },
+  {
+    type: "paragraph",
+    text: "Days spent with family, one after another, quietly paved themselves into a warm road.",
+  },
+  {
+    type: "paragraph",
+    text: "Do you remember the time we camped in the mountains with friends? The campfire flickered, lighting not only the night but also our clumsy, sincere friendship.",
+  },
+  {
+    type: "paragraph",
+    text: "Standing by great rivers, staring at the far bank, laughter from catching fish and shrimp mingled with the sound of water.",
+  },
+  {
+    type: "paragraph",
+    text: "And that first time crossing by steam ferry—the excitement that nearly overflowed—still trembles softly, deep in my chest.",
+  },
+  {
+    type: "paragraph",
+    text: "But none of it can be reached again.",
+  },
+  {
+    type: "paragraph",
+    text: "The past did not suddenly abandon me. It simply retreated without a sound, leaving me no time to say goodbye.",
+  },
+  {
+    type: "paragraph",
+    text: "Those beautiful memories faded little by little in time; I reached out to grasp them, and caught only blankness.",
+  },
+  {
+    type: "paragraph",
+    text: "Whenever I think of this, grief rises like a tide until it is hard to breathe.",
+  },
+  {
+    type: "paragraph",
+    text: "If only I could live it once more.",
+  },
+  {
+    type: "paragraph",
+    text: "Even if only to walk that old road again, to stand once more by that riverbank, to feel once more the present that I did not know was precious.",
+  },
+  {
+    type: "paragraph",
+    text: "But time has no echo.",
+  },
+  {
+    type: "paragraph",
+    text: "It leaves only memory, teaching us—through loss—to learn, slowly, how to cherish.",
+  },
+  {
+    type: "paragraph",
+    text: "I stood before those photographs for a long time without moving.",
+  },
+  {
+    type: "paragraph",
+    text: "The paper has grown tiny ripples; the corners curl slightly, as if resisting time's final erosion.",
+  },
+  {
+    type: "paragraph",
+    text: "I know that one day they will fade completely—like so many faces whose features I can no longer recall.",
+  },
+  {
+    type: "paragraph",
+    text: "Yet in this moment, they still exist with stubborn insistence.",
+  },
+  {
+    type: "paragraph",
+    text: "They exist where I have not yet let go.",
+  },
+  {
+    type: "paragraph",
+    text: "Memory does not always arrive as images.",
+  },
+  {
+    type: "paragraph",
+    text: "More often, it is a feeling: a chest that suddenly tightens, a pause with no reason, a sourness that rises in the quietest hours of night.",
+  },
+  {
+    type: "paragraph",
+    text: "I do not look back on purpose; when the world slows down, the past simply walks out on its own.",
+  },
+  {
+    type: "paragraph",
+    text: "I once believed the pain of remembering was caused by loss.",
+  },
+  {
+    type: "paragraph",
+    text: "Only later did I understand what is truly unbearable: the happiness I did not recognize at the time.",
+  },
+  {
+    type: "paragraph",
+    text: "It was too light.",
+  },
+  {
+    type: "paragraph",
+    text: "So light that, while it was in my hands, it had no weight at all; so light that, once it was gone, it could never be carried again.",
+  },
+  {
+    type: "paragraph",
+    text: "Night deepened.",
+  },
+  {
+    type: "paragraph",
+    text: "Outside the window, wind stirred the shadows of trees, making a sound almost like breathing.",
+  },
+  {
+    type: "paragraph",
+    text: "I closed my eyes and let those images sink one by one into the dark.",
+  },
+  {
+    type: "paragraph",
+    text: "They were no longer sharp, no longer forcing me back to the past—only resting there quietly, like a river that has been marked, reminding me I once walked along its banks.",
+  },
+  {
+    type: "paragraph",
+    text: "Perhaps Xiwangyu lingers in memory not because it refuses to move forward.",
+  },
+  {
+    type: "paragraph",
+    text: "But because—someone must remember those moments that have already gone far away, and remember how real they once were.",
+  },
+  {
+    type: "paragraph",
+    text: "At last I turned and walked away from that wall.",
+  },
+  {
+    type: "paragraph",
+    text: "Not as a farewell.",
+  },
+  {
+    type: "paragraph",
+    text: "But to carry them away gently.",
+  },
+  {
+    type: "paragraph",
+    text: "Time will not turn back, but I can.",
+  },
+  {
+    type: "paragraph",
+    text: "Not to return to the past, but to carry it forward.",
+  },
 ];
 
 const HERO_TITLE = RAW_CONTENT[0].text;
 const STORY_PARAGRAPHS = RAW_CONTENT.slice(1);
 
-const SCROLL_PER_SECTION = 80;
-const HERO_SCROLL_RANGE = 60;
-
-const PARAGRAPHS_PER_SECTION = {
-  mobile: 1,
-  tablet: 1,
-  desktop: 1,
-};
-
-function chunkArray<T>(arr: T[], size: number): T[][] {
-  if (size <= 1) return arr.map((v) => [v]);
-  const out: T[][] = [];
-  for (let i = 0; i < arr.length; i += size) {
-    out.push(arr.slice(i, i + size));
-  }
-  return out;
-}
-
 export default function XirayuPage() {
-  const [activeIdx, setActiveIdx] = useState(-1);
   const [saturation, setSaturation] = useState(0);
-  const [titleState, setTitleState] = useState({ scale: 1, x: 0, y: 0, opacity: 1 });
   const [isLoaded, setIsLoaded] = useState(false);
   const [screenSize, setScreenSize] = useState<'mobile'|'tablet'|'desktop'>(() => {
     if (typeof window === 'undefined') return 'desktop';
@@ -151,246 +222,16 @@ export default function XirayuPage() {
     if (w < 1024) return 'tablet';
     return 'desktop';
   });
-
-  const rafRef = useRef<number | null>(null);
-  const initialMeasureRef = useRef<number | null>(null);
-
-  const pageConfig = useMemo(() => ({
-    ...baseConfig,
-    glow: screenSize === 'mobile' ? 0.30 : 0.42,
-  }), [screenSize]);
-
-  const SECTIONS = useMemo(() => {
-    const perSection = screenSize === 'mobile'
-      ? PARAGRAPHS_PER_SECTION.mobile
-      : screenSize === 'tablet'
-        ? PARAGRAPHS_PER_SECTION.tablet
-        : PARAGRAPHS_PER_SECTION.desktop;
-    return chunkArray(STORY_PARAGRAPHS, perSection);
-  }, [screenSize]);
-
-  const totalHeight = useMemo(() => {
-    return HERO_SCROLL_RANGE + (SECTIONS.length * SCROLL_PER_SECTION) + 30;
-  }, [SECTIONS.length]);
-
-  useEffect(() => {
-    const checkScreen = () => {
-      const w = window.innerWidth;
-      setScreenSize(w < 640 ? 'mobile' : (w < 1024 ? 'tablet' : 'desktop'));
-    };
-    checkScreen();
-    window.addEventListener('resize', checkScreen);
-    return () => window.removeEventListener('resize', checkScreen);
-  }, []);
-
-  const measure = useCallback(() => {
-    const scrollElement = document.scrollingElement || document.documentElement;
-    const scrollY = typeof window !== "undefined" && typeof window.scrollY === "number"
-      ? window.scrollY
-      : scrollElement.scrollTop;
-    const vh = window.innerHeight;
-    const heroProgress = Math.min(Math.max(scrollY / (vh * (HERO_SCROLL_RANGE / 100)), 0), 1);
-
-    setTitleState({
-      scale: 1 - heroProgress * 0.4,
-      y: -heroProgress * (vh * 0.45),
-      x: 0,
-      opacity: 1,
-    });
-
-    let currentIdx = -1;
-    if (heroProgress >= 1) {
-      const storyScroll = scrollY - vh * (HERO_SCROLL_RANGE / 100);
-      const idx = Math.floor(storyScroll / (vh * (SCROLL_PER_SECTION / 100)));
-      currentIdx = Math.min(Math.max(idx, 0), Math.max(0, SECTIONS.length - 1));
-    }
-    setActiveIdx(currentIdx);
-
-    const maxScroll = scrollElement.scrollHeight - scrollElement.clientHeight;
-    const saturationValue = maxScroll > 0 ? (scrollY / maxScroll) * 2.5 : 0;
-    setSaturation(saturationValue);
-  }, [SECTIONS.length]);
-
-  useEffect(() => {
-    const root = document.documentElement;
-    const originalScrollBehavior = root.style.scrollBehavior;
-    const hasScrollRestoration = typeof window !== 'undefined' && 'scrollRestoration' in window.history;
-    const historyObj = window.history as History & { scrollRestoration?: History['scrollRestoration'] };
-    const originalScrollRestoration = hasScrollRestoration ? historyObj.scrollRestoration : null;
-
-    root.style.scrollBehavior = 'auto';
-    if (hasScrollRestoration && originalScrollRestoration) {
-      historyObj.scrollRestoration = 'manual';
-    }
-
-    window.scrollTo(0, 0);
-
-    initialMeasureRef.current = requestAnimationFrame(() => {
-      measure();
-      initialMeasureRef.current = requestAnimationFrame(() => {
-        setIsLoaded(true);
-        initialMeasureRef.current = null;
-      });
-    });
-
-    return () => {
-      root.style.scrollBehavior = originalScrollBehavior;
-      if (hasScrollRestoration) {
-        historyObj.scrollRestoration = originalScrollRestoration ?? 'auto';
-      }
-      if (initialMeasureRef.current) {
-        cancelAnimationFrame(initialMeasureRef.current);
-        initialMeasureRef.current = null;
-      }
-    };
-  }, [measure]);
-
-  useEffect(() => {
-    const scheduleMeasurement = () => {
-      if (rafRef.current) return;
-      rafRef.current = requestAnimationFrame(() => {
-        measure();
-        rafRef.current = null;
-      });
-    };
-
-    scheduleMeasurement();
-
-    window.addEventListener("scroll", scheduleMeasurement, { passive: true });
-    document.addEventListener("scroll", scheduleMeasurement, { passive: true, capture: true });
-    window.addEventListener("resize", scheduleMeasurement);
-
-    return () => {
-      window.removeEventListener("scroll", scheduleMeasurement);
-      document.removeEventListener("scroll", scheduleMeasurement, true);
-      window.removeEventListener("resize", scheduleMeasurement);
-      if (rafRef.current) {
-        cancelAnimationFrame(rafRef.current);
-        rafRef.current = null;
-      }
-    };
-  }, [measure]);
-
-  const progressPercentage = Math.max(0, ((activeIdx + 1) / Math.max(1, SECTIONS.length)) * 100);
-  const progressScale = Math.min(Math.max(progressPercentage / 100, 0), 1);
-  const heroOpacity = isLoaded ? (activeIdx >= 0 ? 0.8 : 1) : 0;
-
   return (
-    <main className="relative w-full bg-black text-white overflow-x-hidden">
-      <Link
-        href="/"
-        className={`fixed top-6 left-5 md:top-8 md:left-10 lg:left-16 z-50 inline-flex items-center gap-2 text-xs md:text-sm font-light tracking-[0.45em] uppercase text-white/70 hover:text-white transition-all duration-500 group
-          ${isLoaded ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"}
-        `}
-        style={{ fontFamily: 'var(--font-geist-mono)' }}
-      >
-        <ArrowLeft className="w-4 h-4 transition-transform duration-300 ease-out group-hover:-translate-x-1" />
-        <span className="tracking-[0.55em]">BACK</span>
-      </Link>
-
-      <StaggeredMenu
-        position="right"
-        items={menuItems}
-        socialItems={socialItems}
-        displaySocials={true}
-        displayItemNumbering={true}
-        menuButtonColor="rgba(255, 255, 255, 0.7)"
-        openMenuButtonColor="#000000"
-        changeMenuColorOnOpen={true}
-        colors={['#9eb6efff', '#2788ffff']}
-        accentColor="#6ba9ffff"
-        onMenuOpen={() => console.log('Menu opened')}
-        onMenuClose={() => console.log('Menu closed')}
-        isFixed={true}
-        displayLogo={false}
-        toggleClassName={`
-          fixed top-6 right-5 md:top-8 md:right-10 lg:right-16 z-50 
-          text-xs md:text-sm font-light tracking-[0.45em] uppercase 
-          transition-all duration-500 hover:text-white
-          ${isLoaded ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"}
-        `}
-        toggleStyle={{ fontFamily: 'var(--font-geist-mono)' }}
+    <XirayuShell isLoaded={isLoaded} saturation={saturation} screenSize={screenSize}>
+      <StoryScroller
+        title={HERO_TITLE}
+        blocks={STORY_PARAGRAPHS}
+        label="Realm of Xirayu"
+        onLoadedChange={setIsLoaded}
+        onScrollRatioChange={(r) => setSaturation(r * 2.5)}
+        onScreenSizeChange={(s) => setScreenSize(s)}
       />
-
-      <FlowingSphereBackground
-        className={`pointer-events-none select-none fixed inset-0 transition-opacity duration-[1200ms] ease-out ${isLoaded ? "opacity-100" : "opacity-0"}`}
-        style={{ zIndex: 0 }}
-        config={pageConfig}
-        saturationOverride={saturation}
-      />
-
-      <div
-        className={`fixed inset-0 z-0 pointer-events-none bg-gradient-to-t from-black/90 via-black/40 to-transparent lg:hidden transition-opacity duration-[1200ms] ease-out ${isLoaded ? "opacity-80" : "opacity-0"}`}
-      />
-
-      <div style={{ height: `${totalHeight}vh` }} className="pointer-events-none w-px opacity-0" />
-
-      <div className="fixed inset-0 z-10 flex flex-col px-5 md:px-10 lg:px-16 pointer-events-none">
-        <div
-          className="origin-bottom-left absolute left-5 md:left-10 lg:left-16 bottom-12 md:bottom-24 w-full max-w-4xl pr-4 pointer-events-none"
-          style={{
-            transform: `translate3d(${titleState.x}px, ${titleState.y}px, 0) scale(${titleState.scale})`,
-            opacity: heroOpacity,
-            transition: 'opacity 700ms ease-out, transform 600ms ease-out',
-            willChange: 'transform, opacity'
-          }}
-        >
-          <span className="block text-xs md:text-sm uppercase tracking-[0.4em] text-cyan-200/70 mb-2 md:mb-4 animate-pulse pointer-events-none">
-            Realm of Xirayu
-          </span>
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold leading-tight text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-white/60 drop-shadow-lg pointer-events-none">
-            {HERO_TITLE}
-          </h1>
-        </div>
-
-        <div className="absolute left-0 bottom-0 w-full px-5 md:px-10 lg:px-16 pb-10 md:pb-20">
-          <div className="relative max-w-2xl pointer-events-none">
-            <div className="absolute bottom-0 left-0 w-full h-[1px] bg-white/10" />
-            <div
-              className="absolute bottom-0 left-0 h-[2px] w-full bg-cyan-400 shadow-[0_0_15px_rgba(34,211,238,0.6)] origin-left"
-              style={{
-                transform: `scaleX(${isLoaded ? progressScale : 0})`,
-                opacity: isLoaded ? Math.max(0.4, progressScale) : 0,
-                transition: 'opacity 700ms ease-out, transform 700ms ease-out, filter 700ms ease-out',
-                filter: `saturate(${1 + progressScale})`,
-                willChange: 'transform, opacity'
-              }}
-            />
-
-            {SECTIONS.map((section, index) => {
-              const isActive = index === activeIdx;
-              return (
-                <div
-                  key={index}
-                  className={`absolute bottom-0 left-0 w-full transition-all duration-1000 ease-out
-                        ${isActive ? "opacity-100 translate-y-0 scale-100 pointer-events-auto" : "opacity-0 translate-y-12 scale-95 pointer-events-none"}`}
-                  style={{
-                    filter: isActive ? "blur(0px)" : "blur(6px)",
-                    transition: "filter 700ms ease-out",
-                  }}
-                >
-                  <div className="relative pb-6 md:pb-8">
-                    {section.map((block, pIdx) => (
-                      <p
-                        key={pIdx}
-                        className="text-lg md:text-xl lg:text-2xl leading-relaxed font-light text-slate-200 drop-shadow-md transition-all duration-700 ease-out"
-                        style={{
-                          transitionDelay: isActive ? `${120 + pIdx * 60}ms` : "0ms",
-                          opacity: isActive ? 1 : 0,
-                          transform: isActive ? "translateY(0)" : "translateY(16px)",
-                          marginBottom: '0.75rem'
-                        }}
-                      >
-                        {block.text}
-                      </p>
-                    ))}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </div>
-    </main>
+    </XirayuShell>
   );
 }

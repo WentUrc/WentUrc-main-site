@@ -1,8 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next"
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import Shell from "@/components/Shell";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -105,9 +104,7 @@ export default function RootLayout({
         style={{ overscrollBehavior: 'none' }}
       >
         <Analytics/>
-        <Navbar />
-        <div className="contents">{children}</div>
-        <Footer />
+        <Shell>{children}</Shell>
       </body>
     </html>
   );

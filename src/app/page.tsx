@@ -54,7 +54,7 @@ export default function Home() {
                 <div className="mt-6 flex items-center gap-6 text-xs text-muted-foreground">
                   <div>
                     <Link
-                      href="https://github.com/BayHyn"
+                      href="/bayhyn"
                       className="inline-flex items-center gap-1.5 text-brand hover:text-brand/90 underline underline-offset-4 decoration-brand/60 transition-colors group"
                     >
                         <BlurText as="span" text="白湖婲" animateBy="letters" stepDuration={0.25} />
