@@ -36,14 +36,14 @@ export default function BayHynShell({ children }: { children: React.ReactNode })
 
       <Link
         href="/"
-        className={`fixed top-6 left-5 md:top-8 md:left-10 lg:left-16 z-50 inline-flex items-center gap-2 text-xs md:text-sm font-light tracking-[0.45em] uppercase text-white/70 hover:text-white transition-all duration-500 group mix-blend-difference
+        className={`fixed top-6 left-5 md:top-8 md:left-10 lg:left-16 z-50 inline-flex items-center gap-2 text-xs md:text-sm font-light tracking-[0.45em] uppercase text-white/70 transition-all duration-500 hover:text-white mix-blend-difference group
           ${isMenuOpen ? "opacity-0 pointer-events-none" : "opacity-100 pointer-events-auto"}
           ${isMenuOpen ? "lg:opacity-100 lg:pointer-events-auto" : ""}
         `}
         style={{ fontFamily: "var(--font-geist-mono)" }}
       >
         <ArrowLeft className="w-4 h-4 transition-transform duration-300 ease-out group-hover:-translate-x-1" />
-        <span className="tracking-[0.55em]">BACK</span>
+        <span>BACK</span>
       </Link>
 
       <StaggeredMenu
