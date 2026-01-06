@@ -52,7 +52,8 @@ export default function Home() {
                     </Link>
                   </GlassReveal>
                 </div>
-                <div className="mt-6 flex items-center gap-6 text-xs text-muted-foreground">
+                
+                <div className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-3 sm:gap-6 text-xs text-muted-foreground">
                   <div>
                     <Link
                       href="https://IGCrystal.icu"
@@ -99,6 +100,7 @@ export default function Home() {
                     </Link>
                   </div>
                 </div>
+
               </div>
             <div className="flex justify-start relative lg:-ml-8">
               <div className="absolute inset-0 pointer-events-none select-none">
