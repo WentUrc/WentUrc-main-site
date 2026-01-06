@@ -2,6 +2,7 @@
 
 import StoryScroller from "@/components/ui/StoryScroller";
 import SparklesText from "@/components/ui/SparklesText";
+import { useBayHynBackground } from "./BayHyn";
 
 const RAW_CONTENT = [
   { type: "heading", text: "To Learn" },
@@ -239,6 +240,8 @@ const HERO_TITLE = RAW_CONTENT[0].text;
 const STORY_PARAGRAPHS = RAW_CONTENT.slice(1);
 
 export default function BayHynPage() {
+  const { setScrollRatio } = useBayHynBackground();
+
   return (
     <div className="relative w-full text-white overflow-x-hidden">
       <StoryScroller
@@ -247,13 +250,14 @@ export default function BayHynPage() {
         labelClassName="block text-xs md:text-sm uppercase tracking-[0.4em] text-purple-200/70 mb-2 md:mb-4 animate-pulse pointer-events-none"
         heroTitleClassName="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold leading-tight pointer-events-none"
         inactiveBlurPx={0}
+        onScrollRatioChange={setScrollRatio}
         renderTitle={(t) => (
           <SparklesText
             as="span"
             text={t}
             sparklesCount={10}
             className="inline-block"
-            textClassName="text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-white/60 drop-shadow-lg"
+            textClassName="text-transparent bg-clip-text bg-gradient-to-r from-purple-200 via-sky-100 to-white/70 drop-shadow-lg"
           />
         )}
         blocks={STORY_PARAGRAPHS}

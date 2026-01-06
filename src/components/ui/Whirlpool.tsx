@@ -27,6 +27,7 @@ export type WhirlpoolProps = {
   spread?: number;
   enablePointerTracking?: boolean;
   attractionStrength?: number;
+  saturation?: number;
   className?: string;
   blur?: number;
   children?: React.ReactNode;
@@ -46,6 +47,7 @@ export default function Whirlpool({
   spread = 200,
   enablePointerTracking = true,
   attractionStrength = 1,
+  saturation = 1,
   className,
   blur = 0,
   children,
@@ -60,6 +62,12 @@ export default function Whirlpool({
       }) as React.CSSProperties,
     [blur]
   );
+
+  const canvasStyle = useMemo(() => {
+    const s = Number.isFinite(saturation) ? saturation : 1;
+    if (Math.abs(s - 1) < 0.001) return undefined;
+    return { filter: `saturate(${s})` } as React.CSSProperties;
+  }, [saturation]);
 
   useEffect(() => {
     const canvasEl = canvasRef.current;
@@ -316,7 +324,7 @@ export default function Whirlpool({
 
   return (
     <div ref={containerRef} className={`relative h-full w-full${className ? ` ${className}` : ""}`}>
-      <canvas ref={canvasRef} className="size-full" />
+      <canvas ref={canvasRef} className="size-full" style={canvasStyle} />
       {blur > 0 ? <div style={blurStyle} className="absolute inset-0 backdrop-blur-[--bubbles-blur]" /> : null}
       <div className="absolute inset-0">{children}</div>
     </div>

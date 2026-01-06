@@ -1,14 +1,36 @@
 "use client";
 
+import { createContext, useContext, useMemo, useState } from "react";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import Whirlpool from "@/components/ui/Whirlpool"; 
 import StaggeredMenu from "@/components/ui/StaggeredMenu";
 import { MENU_ITEMS, SOCIAL_ITEMS } from "@/config/menu";
 
+type BayHynBackgroundContextValue = {
+  setScrollRatio: (ratio01: number) => void;
+};
+
+const BayHynBackgroundContext = createContext<BayHynBackgroundContextValue | null>(null);
+
+export function useBayHynBackground() {
+  const ctx = useContext(BayHynBackgroundContext);
+  if (!ctx) {
+    throw new Error("useBayHynBackground must be used within BayHynShell");
+  }
+  return ctx;
+}
+
 export default function BayHynShell({ children }: { children: React.ReactNode }) {
+  const [scrollRatio, setScrollRatio] = useState(0);
+  const saturation = useMemo(() => {
+    const r = Math.min(1, Math.max(0, scrollRatio));
+    return 0 + 0.6 * r;
+  }, [scrollRatio]);
+
   return (
-    <main className="relative w-full min-h-screen overflow-x-hidden bg-[#020617]">
+    <BayHynBackgroundContext.Provider value={{ setScrollRatio }}>
+      <main className="relative w-full min-h-screen overflow-x-hidden bg-[#020617]">
       
       <Link
         href="/"
@@ -44,6 +66,7 @@ export default function BayHynShell({ children }: { children: React.ReactNode })
             spread={600}
             enablePointerTracking={false}
             attractionStrength={0}
+            saturation={saturation}
         >
           <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-slate-950/40 via-transparent to-slate-950/70" />
           <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_30%_20%,theme(colors.sky.400/0.10),transparent_55%),radial-gradient(circle_at_70%_75%,theme(colors.indigo.400/0.10),transparent_50%)]" />
@@ -54,6 +77,7 @@ export default function BayHynShell({ children }: { children: React.ReactNode })
         {children}
       </div>
       
-    </main>
+      </main>
+    </BayHynBackgroundContext.Provider>
   );
 }
