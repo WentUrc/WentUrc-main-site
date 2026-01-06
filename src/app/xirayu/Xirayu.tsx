@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import FlowingSphereBackground from "@/components/ui/FlowingSphere";
@@ -32,6 +32,8 @@ export default function XirayuShell({
   saturation: number;
   screenSize: XirayuScreenSize;
 }) {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   const pageConfig = useMemo(
     () => ({
       ...baseConfig,
@@ -44,7 +46,9 @@ export default function XirayuShell({
     <main className="relative w-full bg-black text-white overflow-x-hidden">
       <Link
         href="/"
-        className={`fixed top-6 left-5 md:top-8 md:left-10 lg:left-16 z-50 inline-flex items-center gap-2 text-xs md:text-sm font-light tracking-[0.45em] uppercase text-white/70 hover:text-white transition-all duration-500 group
+        className={`fixed top-6 left-5 md:top-8 md:left-10 lg:left-16 z-50 inline-flex items-center gap-2 text-xs md:text-sm font-light tracking-[0.45em] uppercase text-white/70 hover:text-white transition-all duration-500 group ${
+          isMenuOpen ? "pointer-events-none" : ""
+        }
           ${isLoaded ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"}
         `}
         style={{ fontFamily: "var(--font-geist-mono)" }}
@@ -64,8 +68,8 @@ export default function XirayuShell({
         changeMenuColorOnOpen={true}
         colors={["#9eb6efff", "#2788ffff"]}
         accentColor="#6ba9ffff"
-        onMenuOpen={() => console.log("Menu opened")}
-        onMenuClose={() => console.log("Menu closed")}
+        onMenuOpen={() => setIsMenuOpen(true)}
+        onMenuClose={() => setIsMenuOpen(false)}
         isFixed={true}
         displayLogo={false}
         toggleClassName={`

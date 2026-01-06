@@ -74,7 +74,6 @@ export default function BayHynShell({ children }: { children: React.ReactNode })
             spread={600}
             enablePointerTracking={false}
             attractionStrength={0}
-            // @ts-ignore 
             saturation={saturation}
         >
           <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-purple-950/30 via-fuchsia-950/10 to-slate-950/75" />
