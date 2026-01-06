@@ -23,6 +23,8 @@ export function useBayHynBackground() {
 
 export default function BayHynShell({ children }: { children: React.ReactNode }) {
   const [scrollRatio, setScrollRatio] = useState(0);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   const saturation = useMemo(() => {
     const r = Math.min(1, Math.max(0, scrollRatio));
     return 0 + 0.6 * r;
@@ -31,10 +33,13 @@ export default function BayHynShell({ children }: { children: React.ReactNode })
   return (
     <BayHynBackgroundContext.Provider value={{ setScrollRatio }}>
       <main className="relative w-full min-h-screen overflow-x-hidden bg-[#020617]">
-      
+
       <Link
         href="/"
-        className="fixed top-6 left-5 md:top-8 md:left-10 lg:left-16 z-50 inline-flex items-center gap-2 text-xs md:text-sm font-light tracking-[0.45em] uppercase text-white/70 hover:text-white transition-all duration-500 group mix-blend-difference"
+        className={`fixed top-6 left-5 md:top-8 md:left-10 lg:left-16 z-50 inline-flex items-center gap-2 text-xs md:text-sm font-light tracking-[0.45em] uppercase text-white/70 hover:text-white transition-all duration-500 group mix-blend-difference
+          ${isMenuOpen ? "opacity-0 pointer-events-none" : "opacity-100 pointer-events-auto"}
+          ${isMenuOpen ? "lg:opacity-100 lg:pointer-events-auto" : ""}
+        `}
         style={{ fontFamily: "var(--font-geist-mono)" }}
       >
         <ArrowLeft className="w-4 h-4 transition-transform duration-300 ease-out group-hover:-translate-x-1" />
@@ -56,6 +61,9 @@ export default function BayHynShell({ children }: { children: React.ReactNode })
         displayLogo={false}
         toggleClassName="fixed top-6 right-5 md:top-8 md:right-10 lg:right-16 z-50 text-xs md:text-sm font-light tracking-[0.45em] uppercase text-white/70 transition-all duration-500 hover:text-white mix-blend-difference"
         toggleStyle={{ fontFamily: "var(--font-geist-mono)" }}
+    
+        onMenuOpen={() => setIsMenuOpen(true)}
+        onMenuClose={() => setIsMenuOpen(false)}
       />
 
       <div className="fixed inset-0 z-0 h-dvh w-screen">
@@ -66,6 +74,7 @@ export default function BayHynShell({ children }: { children: React.ReactNode })
             spread={600}
             enablePointerTracking={false}
             attractionStrength={0}
+            // @ts-ignore 
             saturation={saturation}
         >
           <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-purple-950/30 via-fuchsia-950/10 to-slate-950/75" />
