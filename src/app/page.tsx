@@ -5,6 +5,7 @@ import Reveal from "@/components/ui/Reveal";
 import BlurText from "@/components/ui/BlurText";
 import BackgroundWithMask from "@/components/ui/BackgroundWithMask";
 import GlassReveal from "@/components/ui/GlassReveal";
+import SparklesText from "@/components/ui/SparklesText";
 
 export default function Home() {
   return (
@@ -54,10 +55,28 @@ export default function Home() {
                 <div className="mt-6 flex items-center gap-6 text-xs text-muted-foreground">
                   <div>
                     <Link
+                      href="https://IGCrystal.icu"
+                      className="inline-flex items-center gap-1.5 text-brand hover:text-brand/90 underline underline-offset-4 decoration-brand/60 transition-colors group"
+                    >
+                        <BlurText as="span" text="冰苷晶" animateBy="letters" stepDuration={0.25} />
+                      <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    </Link>
+                  </div>
+                  <div>
+                    <Link
                       href="/bayhyn"
                       className="inline-flex items-center gap-1.5 text-brand hover:text-brand/90 underline underline-offset-4 decoration-brand/60 transition-colors group"
                     >
                         <BlurText as="span" text="白湖婲" animateBy="letters" stepDuration={0.25} />
+                      <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    </Link>
+                  </div>
+                  <div>
+                    <Link
+                      href="/xirayu"
+                      className="inline-flex items-center gap-1.5 text-brand hover:text-brand/90 underline underline-offset-4 decoration-brand/60 transition-colors group"
+                    >
+                        <BlurText as="span" text="溪忘雨" animateBy="letters" stepDuration={0.25} />
                       <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                     </Link>
                   </div>
@@ -76,24 +95,6 @@ export default function Home() {
                       className="inline-flex items-center gap-1.5 text-brand hover:text-brand/90 underline underline-offset-4 decoration-brand/60 transition-colors group"
                     >
                         <BlurText as="span" text="鹿弥音" animateBy="letters" stepDuration={0.25} />
-                      <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                    </Link>
-                  </div>
-                  <div>
-                    <Link
-                      href="/xirayu"
-                      className="inline-flex items-center gap-1.5 text-brand hover:text-brand/90 underline underline-offset-4 decoration-brand/60 transition-colors group"
-                    >
-                        <BlurText as="span" text="溪忘雨" animateBy="letters" stepDuration={0.25} />
-                      <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                    </Link>
-                  </div>
-                  <div>
-                    <Link
-                      href="https://IGCrystal.icu"
-                      className="inline-flex items-center gap-1.5 text-brand hover:text-brand/90 underline underline-offset-4 decoration-brand/60 transition-colors group"
-                    >
-                        <BlurText as="span" text="冰苷晶" animateBy="letters" stepDuration={0.25} />
                       <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                     </Link>
                   </div>
@@ -124,7 +125,21 @@ export default function Home() {
       <Reveal>
         <section id="overview" className="py-12 relative z-20">
           <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-            <h2 className="text-2xl font-semibold tracking-tight flex items-center gap-2"><Feather className="h-5 w-5 text-brand" />心念织梦之界</h2>
+            <h2 className="text-3xl font-semibold tracking-tight flex items-center gap-2">
+              <Feather className="h-6 w-6 text-brand" />
+              <SparklesText
+                as="span"
+                text="心念织梦之界"
+                sparklesCount={8}
+                className="inline-block"
+                textClassName="text-current"
+                colors={{ first: "#38bdf8", second: "#0794d5ff" }}
+              />
+            </h2>
+
+            <div
+              className="mt-6 h-[2px] w-full bg-blue-300" 
+            />
           </div>
         </section>
       </Reveal>
