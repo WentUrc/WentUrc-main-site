@@ -139,8 +139,10 @@ export default function Home() {
               />
             </h2>
 
+            <p className="mt-2 text-sm text-muted italic">Woven by Will, Lit by Peace</p>
+
             <div
-              className="mt-6 h-[2px] w-full bg-blue-300" 
+              className="mt-6 h-[2px] w-full bg-blue-300 dark:bg-blue-500" 
             />
           </div>
         </section>
@@ -152,8 +154,9 @@ export default function Home() {
           <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
             <h3 className="text-xl font-semibold tracking-tight flex items-center gap-2"><Sparkles className="h-5 w-5 text-brand" />世界概述</h3>
             <div className="mt-3 space-y-3 text-[15px] leading-7 text-muted">
-              <p>一个由心念共振所编织的世界。现实不再受物理法则单向定义，而由个体与群体的意志同频成形；想象、愿望与梦境皆可投影为真实。</p>
-              <p>表面是中世纪风貌——高塔、浮岛、石街与村庄；本质是以「心流共振」为内核的高阶魔导科技：以“念感传导阵”心灵通话，以“灵风石”自由翱翔。</p>
+              <p>Revaea 是一个建立在「心念」之上的魔法世界。在这里，现实并非由物理法则维系，而是由个体与集体的意志共同编织成形；信念愈坚定，世界便愈清晰；想象、愿望，乃至梦境，都可能投影为真实存在。</p>
+              <p>文明的外观停留在中世纪的诗意剪影之中：哥特式高塔、浮空群岛、石砖街道与田园村庄。然而，在这温和表象之下，隐藏着以「心流共振」为核心的高度发达魔法技术体系。</p>
+              <p>这里没有互联网，却存在“念感传导阵”，使心与心跨越空间交谈；这里没有飞行器，却能借助“灵风石”自由翱翔天际。</p>
             </div>
           </div>
         </section>
@@ -165,8 +168,9 @@ export default function Home() {
           <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
             <h3 className="text-xl font-semibold tracking-tight flex items-center gap-2"><Heart className="h-5 w-5 text-brand" />世界主旨</h3>
             <div className="mt-3 space-y-3 text-[15px] leading-7 text-muted">
-              <p>不设仇恨与战争，这里是一间关于“精神和谐”的实验室。每个生命被鼓励在冥想、创作与交流中与世界共振，活出自己的原初形。</p>
-              <p>唯心即真。情感越纯净、越真诚，对世界底层的影响越深：怒可起风暴，爱能唤星辰。</p>
+              <p>Revaea 并不崇尚战争，也不存在被定义为“邪恶”的势力。相反，它更像是一座关于精神与秩序的实验世界，一次对“和谐可能性”的持续探索。</p>
+              <p>每一个生命都被鼓励回归真实的自我，通过冥想、创作与交流，与世界产生共振。唯心，即为真理。</p>
+              <p>世界的一切皆为“心之映射”，情感越纯粹，其对现实的影响便越深刻：愤怒会引发风暴，而爱，能够唤醒沉睡的星辰。</p>
             </div>
           </div>
         </section>
@@ -177,13 +181,14 @@ export default function Home() {
         <section id="cases" className="py-6 relative z-20">
           <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
             <h3 className="text-xl font-semibold tracking-tight flex items-center gap-2"><Users className="h-5 w-5 text-brand" />社会构成</h3>
-            <p className="mt-3 text-[15px] leading-7 text-muted">以“梦环”（Dream Circles）为基本单位的自治共同体：由理念相近、心念共鸣的成员自发组成。各梦环互不干涉、彼此协作。</p>
+            <p className="mt-3 text-[15px] leading-7 text-muted">Revaea 的社会结构松散而自由，几乎不存在传统意义上的国家与政府。取而代之的，是被称为「梦环（Dream Circles）」的生活共同体。</p>
+            <p className="mt-3 text-[15px] leading-7 text-muted">梦环由理念相近、心念共鸣的个体自然形成，彼此独立，却又能够协作互助。它们之间不存在统治关系，只有共振与回应。</p>
             <div className="mt-4 space-y-2 text-[15px] leading-7">
-              <div>比如——</div>
+              <div>常见的梦环包括——</div>
               <ul className="space-y-2 text-muted">
-                <li className="flex items-start gap-2"><Coffee className="h-4 w-4 mt-1 text-brand" /><span><span className="font-medium">净茶梦环</span>：以茶与呼吸疗愈心绪，修复心流。</span></li>
-                <li className="flex items-start gap-2"><BookOpen className="h-4 w-4 mt-1 text-brand" /><span><span className="font-medium">记忆图书馆</span>：收藏并检索居民的心象书页与回响。</span></li>
-                <li className="flex items-start gap-2"><Palette className="h-4 w-4 mt-1 text-brand" /><span><span className="font-medium">幻绘园</span>：以念力作画，生成可步入的半现实空间。</span></li>
+                <li className="flex items-start gap-2"><Coffee className="h-4 w-4 mt-1 text-brand" /><span><span className="font-medium">净茶梦环</span>：以精神疗愈与茶艺冥想为核心的静修群体。</span></li>
+                <li className="flex items-start gap-2"><BookOpen className="h-4 w-4 mt-1 text-brand" /><span><span className="font-medium">记忆图书馆</span>：保存每一位居民心象与经历的精神档案之地。</span></li>
+                <li className="flex items-start gap-2"><Palette className="h-4 w-4 mt-1 text-brand" /><span><span className="font-medium">幻绘园</span>：艺术家以念力作画，使作品化为半现实空间。</span></li>
               </ul>
             </div>
           </div>
@@ -195,12 +200,12 @@ export default function Home() {
         <section id="faq" className="py-6 relative z-20">
           <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
             <h3 className="text-xl font-semibold tracking-tight flex items-center gap-2"><Wand2 className="h-5 w-5 text-brand" />魔法系统：意念架构（Mindcraft）</h3>
-            <p className="mt-3 text-[15px] leading-7 text-muted">魔法是自我精神的结构化表达。</p>
+            <p className="mt-3 text-[15px] leading-7 text-muted">Revaea 的魔法并非对外力的操控，而是自我精神的显现。力量来源于理解，而非征服。</p>
             <ul className="mt-3 space-y-2 text-[15px] leading-7 text-muted">
-              <li className="flex items-start gap-2"><Sparkles className="h-4 w-4 mt-1 text-brand" />显相术：以情绪为参数，将构思聚合为实体。</li>
-              <li className="flex items-start gap-2"><Share2 className="h-4 w-4 mt-1 text-brand" />念环术：构建共享思维回路，实现多脑协作。</li>
-              <li className="flex items-start gap-2"><MoonStar className="h-4 w-4 mt-1 text-brand" />梦织术：在梦境建构空间，并以星力锚定于现实。</li>
-              <li className="flex items-start gap-2"><Gem className="h-4 w-4 mt-1 text-brand" />温序魔具：由心晶驱动的魔械，兼具仪式感与实用性。</li>
+              <li className="flex items-start gap-2"><Sparkles className="h-4 w-4 mt-1 text-brand" />显相术：将想法实体化，其形态由情绪与认知共同决定。</li>
+              <li className="flex items-start gap-2"><Share2 className="h-4 w-4 mt-1 text-brand" />念环术：连接多个意识，构建共享思维回路，实现群体协作的“多心一体”。</li>
+              <li className="flex items-start gap-2"><MoonStar className="h-4 w-4 mt-1 text-brand" />梦织术：在梦境中构筑空间，并借助星力将其锚定于现实。</li>
+              <li className="flex items-start gap-2"><Gem className="h-4 w-4 mt-1 text-brand" />温序魔具：以心晶驱动的魔法机械，强调稳定、温和与美感。</li>
             </ul>
           </div>
         </section>
@@ -211,8 +216,9 @@ export default function Home() {
         <section id="style" className="py-6 relative z-20">
           <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
             <h3 className="text-2xl font-semibold tracking-tight flex items-center gap-2"><Music className="h-5 w-5 text-brand" />风格基调</h3>
-            <p className="mt-3 text-[15px] leading-7 text-muted">慢与温柔是默认节拍：晨雾里的浮空温泉、星夜中的灵歌会、银藤花街的旅人……</p>
-            <p className="mt-3 text-[15px] leading-7 text-muted">当冲突谢幕，只剩世界在自我修复与治愈中缓慢呼吸，温柔回应每一次迷失。</p>
+            <p className="mt-3 text-[15px] leading-7 text-muted">Revaea 更像是一首没有黑暗章节的长诗。世界的节奏缓慢而温柔：晨曦中的浮空温泉、星夜下的灵歌集会、猫娘、少女行走于银藤花街的脚步声。</p>
+            <p className="mt-3 text-[15px] leading-7 text-muted">所有激烈的冲突早已成为过去。如今留下的，是一个在自我修复与治愈中缓缓呼吸的世界。</p>
+            <p className="mt-3 text-[15px] leading-7 text-muted">它宛如拥有灵魂的生命体，静静地、温柔地，回应每一颗曾经迷失的心。</p>
           </div>
         </section>
       </Reveal>
