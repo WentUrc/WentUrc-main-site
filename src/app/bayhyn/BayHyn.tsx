@@ -43,7 +43,7 @@ export default function BayHynShell({ children }: { children: React.ReactNode })
         style={{ fontFamily: "var(--font-geist-mono)" }}
       >
         <ArrowLeft className="w-4 h-4 transition-transform duration-300 ease-out group-hover:-translate-x-1" />
-        <span>BACK</span>
+        <span className="tracking-[0.55em]">BACK</span>
       </Link>
 
       <StaggeredMenu
