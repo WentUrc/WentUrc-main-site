@@ -125,24 +125,28 @@ export default function Home() {
 
       {/* Overview + Title */}
       <Reveal>
-        <section id="overview" className="py-12 relative z-20">
+        <section id="overview" className="py-10 relative z-20">
           <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-            <h2 className="text-3xl font-semibold tracking-tight flex items-center gap-2">
-              <Feather className="h-6 w-6 text-brand" />
-              <SparklesText
-                as="span"
-                text="心念织梦之界"
-                sparklesCount={8}
-                className="inline-block"
-                textClassName="text-current"
-                colors={{ first: "#38bdf8", second: "#0794d5ff" }}
-              />
-            </h2>
+            <div className="flex items-start gap-3">
+              <Feather className="h-10 w-10 text-brand flex-none self-center" />
+              <div>
+                <h2 className="text-3xl font-semibold tracking-tight">
+                  <SparklesText
+                    as="span"
+                    text="心念织梦之界"
+                    sparklesCount={8}
+                    className="inline-block"
+                    textClassName="text-current"
+                    colors={{ first: "#38bdf8", second: "#0794d5ff" }}
+                  />
+                </h2>
 
-            <p className="mt-2 text-sm text-muted italic">Woven by Will, Lit by Peace</p>
+                <p className="mt-2 text-sm text-muted italic">Woven by Will, Lit by Peace</p>
+              </div>
+            </div>
 
             <div
-              className="mt-6 h-[2px] w-full bg-blue-300 dark:bg-blue-500" 
+              className="mt-4 h-[2px] w-full bg-blue-300 dark:bg-blue-500" 
             />
           </div>
         </section>
