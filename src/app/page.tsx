@@ -146,7 +146,7 @@ export default function Home() {
             </div>
 
             <div
-              className="mt-4 h-[2px] w-full bg-blue-300 dark:bg-blue-500" 
+              className="mt-4 h-[2px] w-full bg-blue-500 dark:bg-blue-500" 
             />
           </div>
         </section>
